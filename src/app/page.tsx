@@ -156,6 +156,7 @@ const testimonials = [
     name: "Sarah Mitchell",
     business: "Mitchell & Co Construction",
     location: "Sydney, NSW",
+        avatar: "/images/avatar-sarah.png",
     quote:
       "ElevateLend matched us with a lender in under 4 hours. We secured $350k for equipment at a rate 2% lower than our bank offered. Incredible service.",
     rating: 5,
@@ -164,6 +165,7 @@ const testimonials = [
     name: "James Huang",
     business: "Jade Garden Restaurants",
     location: "Melbourne, VIC",
+        avatar: "/images/avatar-james.png",
     quote:
       "The application took 5 minutes. Within 24 hours we had three offers to choose from. The team guided us through every step. Highly recommend.",
     rating: 5,
@@ -172,6 +174,7 @@ const testimonials = [
     name: "Lisa Thompson",
     business: "Thompson Transport Group",
     location: "Brisbane, QLD",
+        avatar: "/images/avatar-lisa.png",
     quote:
       "We needed fleet finance fast. ElevateLend delivered. Five new trucks financed in a week. Their lender network is unmatched in Australia.",
     rating: 5,
@@ -661,10 +664,17 @@ export default function HomePage() {
                     <p className="text-sm text-navy-600 leading-relaxed flex-1">
                       &ldquo;{t.quote}&rdquo;
                     </p>
-                    <div className="mt-6 pt-4 border-t border-navy-100">
+                    <div className="mt-6 pt-4 border-t border-navy-100 flex items-center gap-3">
+                                            <img
+                                                                      src={t.avatar}
+                                                                      alt={t.name}
+                                                                      className="w-10 h-10 rounded-full object-cover"
+                                                                    />
+                                            <div>
                       <p className="font-semibold text-navy-900 text-sm">{t.name}</p>
                       <p className="text-xs text-navy-500">{t.business}</p>
                       <p className="text-xs text-navy-400">{t.location}</p>
+                                            </div>
                     </div>
                   </CardContent>
                 </Card>

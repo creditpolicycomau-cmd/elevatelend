@@ -86,7 +86,7 @@ function FadeInSection({
   delay?: number;
 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-20px" });
   return (
     <motion.div
       ref={ref}
@@ -96,7 +96,7 @@ function FadeInSection({
       className={className}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -236,7 +236,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         className="overflow-hidden"
       >
         <p className="px-5 pb-5 text-sm text-navy-500 leading-relaxed">{a}</p>
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -263,47 +263,34 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left content */}
             <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
+              <div className="hero-animate-delay-1">
                 <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
                   <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
                   <span className="text-xs font-medium text-white/70">
                     Trusted by 1,200+ Australian businesses
                   </span>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight"
+              <h1
+                className="hero-animate-delay-1 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight"
               >
                 <span className="text-white">Elevate your </span>
                 <span className="gradient-text">business funding.</span>
                 <br />
                 <span className="text-white">Sorted in minutes.</span>
-              </motion.h1>
+              </h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="mt-6 text-lg text-navy-300 max-w-xl leading-relaxed"
+              <p
+                className="hero-animate-delay-2 mt-6 text-lg text-navy-300 max-w-xl leading-relaxed"
               >
                 Compare 75+ Australian lenders in one free application. No credit
                 hit, no obligations — just the best rates matched to your
                 business in minutes.
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="mt-8 flex flex-wrap gap-4"
+              <div
+                className="hero-animate-delay-3 mt-8 flex flex-wrap gap-4"
               >
                 <Link href="/apply">
                   <Button variant="primary" size="xl">
@@ -316,14 +303,11 @@ export default function HomePage() {
                     How it Works
                   </Button>
                 </a>
-              </motion.div>
+              </div>
 
               {/* Trust badges */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="mt-10 flex flex-wrap items-center gap-6 text-sm text-navy-400"
+              <div
+                className="hero-animate-delay-4 mt-10 flex flex-wrap items-center gap-6 text-sm text-navy-400"
               >
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-success" />
@@ -337,17 +321,14 @@ export default function HomePage() {
                   <Users className="w-4 h-4 text-blue-400" />
                   <span>75+ lenders</span>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Right: Floating stat cards */}
             <div className="hidden lg:block relative h-[500px]">
               {/* Card 1 */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute top-4 right-8 animate-float"
+              <div
+                className="hero-animate-delay-5 absolute top-4 right-8 animate-float"
               >
                 <div className="glass rounded-2xl p-6 min-w-[220px]">
                   <div className="flex items-center gap-3 mb-3">
@@ -358,14 +339,11 @@ export default function HomePage() {
                   </div>
                   <p className="text-3xl font-bold text-white">$2.4B+</p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Card 2 */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="absolute top-44 left-0 animate-float"
+              <div
+                className="hero-animate-delay-5 absolute top-44 left-0 animate-float"
                 style={{ animationDelay: "2s" }}
               >
                 <div className="glass rounded-2xl p-6 min-w-[200px]">
@@ -377,14 +355,11 @@ export default function HomePage() {
                   </div>
                   <p className="text-3xl font-bold text-white">93%</p>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Card 3 */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="absolute bottom-8 right-16 animate-float"
+              <div
+                className="hero-animate-delay-5 absolute bottom-8 right-16 animate-float"
                 style={{ animationDelay: "4s" }}
               >
                 <div className="glass rounded-2xl p-6 min-w-[220px]">
@@ -401,7 +376,7 @@ export default function HomePage() {
                     from 680+ reviews
                   </p>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

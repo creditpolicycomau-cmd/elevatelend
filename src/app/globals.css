@@ -138,3 +138,53 @@ body {
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
 }
+
+/* Hero animation classes - CSS-based, no JS hydration delay */
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-animate {
+    animation: heroFadeIn 0.8s ease forwards;
+  }
+  .hero-animate-delay-1 {
+    opacity: 0;
+    animation: heroFadeIn 0.8s ease 0.1s forwards;
+  }
+  .hero-animate-delay-2 {
+    opacity: 0;
+    animation: heroFadeIn 0.8s ease 0.2s forwards;
+  }
+  .hero-animate-delay-3 {
+    opacity: 0;
+    animation: heroFadeIn 0.8s ease 0.3s forwards;
+  }
+  .hero-animate-delay-4 {
+    opacity: 0;
+    animation: heroFadeIn 0.8s ease 0.4s forwards;
+  }
+  .hero-animate-delay-5 {
+    opacity: 0;
+    animation: heroFadeIn 0.8s ease 0.5s forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate,
+  .hero-animate-delay-1,
+  .hero-animate-delay-2,
+  .hero-animate-delay-3,
+  .hero-animate-delay-4,
+  .hero-animate-delay-5 {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}

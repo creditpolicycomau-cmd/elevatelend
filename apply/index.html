@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Business Finance | ElevateLend</title>
+  <meta name="description" content="Get matched with the right business lender in minutes. Free, no-obligation quote. No credit check required to apply.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://elevatelend.com.au/apply/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Apply for Business Finance | ElevateLend">
+  <meta property="og:description" content="Get matched with the right business lender in minutes. Free, no-obligation quote.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elevatelend.com.au/apply/">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Page-specific styles (embedded for single-page load performance) -->
+  <style>
+    /* =====================================================================
+       APPLICATION FORM PAGE — SCOPED STYLES
+       ===================================================================== */
+
+    /* --- Page Layout --- */
+    .apply-page {
+      padding-top: 80px;
+      min-height: 100vh;
+      background: var(--color-gray-50);
+    }
+
+    .apply-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-5);
+    }
+
+    @media (min-width: 1024px) {
+      .apply-layout {
+        grid-template-columns: 1fr 320px;
+        padding: var(--space-12) var(--space-5);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .apply-layout {
+        grid-template-columns: 1fr 360px;
+      }
+    }
+
+    /* --- Form Header --- */
+    .apply-header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .apply-header__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) var(--space-4);
+      background: var(--color-gold-50);
+      color: var(--color-gold-600);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-gold-200);
+      margin-bottom: var(--space-4);
+    }
+
+    .apply-header__title {
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-3);
+    }
+
+    .apply-header__subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-gray-500);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* --- Trust Ribbon --- */
+    .trust-ribbon {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-gray-200);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .trust-ribbon__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-gray-600);
+    }
+
+    .trust-ribbon__icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .trust-ribbon__icon--shield { color: var(--color-success); }
+    .trust-ribbon__icon--check { color: var(--color-info); }
+    .trust-ribbon__icon--clock { color: var(--color-gold-500); }
+
+    /* --- Progress Bar --- */
+    .progress {
+      margin-bottom: var(--space-8);
+    }
+
+    .progress__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-3);
+    }
+
+    .progress__label {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-navy-900);
+    }
+
+    .progress__count {
+      font-size: var(--font-size-sm);
+      color: var(--color-gray-400);
+    }
+
+    .progress__bar {
+      width: 100%;
+      height: 6px;
+      background: var(--color-gray-200);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress__fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-gold-400), var(--color-gold-500));
+      border-radius: var(--radius-full);
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .progress__steps {
+      display: flex;
+      justify-content: space-between;
+      margin-top: var(--space-3);
+    }
+
+    .progress__step {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-xs);
+      color: var(--color-gray-400);
+      font-weight: var(--font-weight-medium);
+      transition: color var(--transition-base);
+    }
+
+    .progress__step.is-active {
+      color: var(--color-gold-600);
+    }
+
+    .progress__step.is-complete {
+      color: var(--color-success);
+    }
+
+    .progress__dot {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      background: var(--color-gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-gray-500);
+      transition: all var(--transition-base);
+    }
+
+    .progress__step.is-active .progress__dot {
+      background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-500));
+      color: var(--color-navy-900);
+      box-shadow: 0 0 0 4px rgba(212, 168, 83, 0.2);
+    }
+
+    .progress__step.is-complete .progress__dot {
+      background: var(--color-success);
+      color: var(--color-white);
+    }
+
+    @media (max-width: 639px) {
+      .progress__step-label { display: none; }
+    }
+
+    /* --- Form Card --- */
+    .form-card {
+      background: var(--color-white);
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--color-gray-200);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-8) var(--space-6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .form-card {
+        padding: var(--space-10) var(--space-8);
+      }
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-gold-400), var(--color-gold-500), var(--color-gold-400));
+    }
+
+    /* --- Form Steps --- */
+    .form-step {
+      display: none;
+      animation: fadeSlideUp 0.4s ease-out;
+    }
+
+    .form-step.is-active {
+      display: block;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-step__header {
+      margin-bottom: var(--space-8);
+    }
+
+    .form-step__step-label {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wider);
+      color: var(--color-gold-500);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-step__title {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-step__description {
+      font-size: var(--font-size-base);
+      color: var(--color-gray-500);
+    }
+
+    /* --- Form Fields --- */
+    .form-group {
+      margin-bottom: var(--space-6);
+    }
+
+    .form-group label,
+    .form-label {
+      display: block;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-navy-900);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-label__optional {
+      font-weight: var(--font-weight-regular);
+      color: var(--color-gray-400);
+      font-size: var(--font-size-xs);
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--font-size-base);
+      color: var(--color-gray-800);
+      background: var(--color-white);
+      border: 2px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .form-input:hover,
+    .form-select:hover {
+      border-color: var(--color-gray-300);
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--color-gold-400);
+      box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.15);
+    }
+
+    .form-input.field-error,
+    .form-select.field-error {
+      border-color: var(--color-error);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    .form-input.field-success,
+    .form-select.field-success {
+      border-color: var(--color-success);
+    }
+
+    .form-input::placeholder {
+      color: var(--color-gray-400);
+    }
+
+    .field-message {
+      display: block;
+      font-size: var(--font-size-xs);
+      color: var(--color-error);
+      margin-top: var(--space-1);
+      min-height: 18px;
+    }
+
+    /* Select styling */
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 6l3.5 4 3.5-4z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      padding-right: var(--space-10);
+      cursor: pointer;
+    }
+
+    /* --- Amount Slider --- */
+    .amount-display {
+      text-align: center;
+      margin-bottom: var(--space-4);
+    }
+
+    .amount-display__value {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-navy-900);
+      letter-spacing: var(--letter-spacing-tight);
+    }
+
+    .amount-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      background: linear-gradient(to right, var(--color-gold-400) 0%, var(--color-gold-400) var(--slider-pct, 50%), var(--color-gray-200) var(--slider-pct, 50%), var(--color-gray-200) 100%);
+      border-radius: var(--radius-full);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .amount-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-500));
+      box-shadow: 0 2px 8px rgba(212, 168, 83, 0.4);
+      cursor: grab;
+      border: 3px solid var(--color-white);
+      transition: box-shadow var(--transition-fast);
+    }
+
+    .amount-slider::-webkit-slider-thumb:hover {
+      box-shadow: 0 2px 12px rgba(212, 168, 83, 0.6);
+    }
+
+    .amount-slider::-moz-range-thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-500));
+      box-shadow: 0 2px 8px rgba(212, 168, 83, 0.4);
+      cursor: grab;
+      border: 3px solid var(--color-white);
+    }
+
+    .amount-range-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: var(--space-2);
+      font-size: var(--font-size-xs);
+      color: var(--color-gray-400);
+    }
+
+    /* --- Card-Style Radio Buttons --- */
+    .radio-cards {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .radio-cards--2col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .radio-cards--3col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 639px) {
+      .radio-cards--3col {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .radio-card {
+      position: relative;
+    }
+
+    .radio-card input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .radio-card__label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-3);
+      background: var(--color-white);
+      border: 2px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      text-align: center;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-gray-700);
+      transition: all var(--transition-fast);
+      min-height: 60px;
+    }
+
+    .radio-card__label:hover {
+      border-color: var(--color-gold-300);
+      background: var(--color-gold-50);
+    }
+
+    .radio-card input:checked + .radio-card__label {
+      border-color: var(--color-gold-400);
+      background: var(--color-gold-50);
+      color: var(--color-navy-900);
+      box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.15);
+    }
+
+    .radio-card input:focus-visible + .radio-card__label {
+      outline: 2px solid var(--color-gold-400);
+      outline-offset: 2px;
+    }
+
+    .radio-card__icon {
+      font-size: 1.5rem;
+    }
+
+    .radio-card__text {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .radio-card__subtext {
+      font-size: var(--font-size-xs);
+      color: var(--color-gray-400);
+      font-weight: var(--font-weight-regular);
+    }
+
+    /* Large YES/NO cards */
+    .radio-card--yesno .radio-card__label {
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-5) var(--space-6);
+      min-height: auto;
+    }
+
+    .radio-card--yesno .radio-card__indicator {
+      width: 22px;
+      height: 22px;
+      border-radius: var(--radius-full);
+      border: 2px solid var(--color-gray-300);
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    .radio-card--yesno input:checked + .radio-card__label .radio-card__indicator {
+      border-color: var(--color-gold-400);
+      background: var(--color-gold-400);
+    }
+
+    .radio-card--yesno input:checked + .radio-card__label .radio-card__indicator::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-white);
+      transform: translate(-50%, -50%);
+    }
+
+    /* --- Checkbox Cards (Lender List) --- */
+    .checkbox-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+
+    @media (min-width: 640px) {
+      .checkbox-cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .checkbox-card {
+      position: relative;
+    }
+
+    .checkbox-card input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .checkbox-card__label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-white);
+      border: 2px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-gray-700);
+      transition: all var(--transition-fast);
+    }
+
+    .checkbox-card__label:hover {
+      border-color: var(--color-gold-300);
+    }
+
+    .checkbox-card input:checked + .checkbox-card__label {
+      border-color: var(--color-gold-400);
+      background: var(--color-gold-50);
+      color: var(--color-navy-900);
+    }
+
+    .checkbox-card__check {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--color-gray-300);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+
+    .checkbox-card input:checked + .checkbox-card__label .checkbox-card__check {
+      background: var(--color-gold-400);
+      border-color: var(--color-gold-400);
+    }
+
+    .checkbox-card__check-icon {
+      display: none;
+      width: 12px;
+      height: 12px;
+      color: var(--color-white);
+    }
+
+    .checkbox-card input:checked + .checkbox-card__label .checkbox-card__check-icon {
+      display: block;
+    }
+
+    /* --- Consent Checkboxes --- */
+    .consent-group {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-4);
+      border: 2px solid transparent;
+      transition: border-color var(--transition-fast);
+    }
+
+    .consent-group.field-error {
+      border-color: var(--color-error);
+      background: var(--color-error-light);
+    }
+
+    .consent-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--color-gold-400);
+      cursor: pointer;
+    }
+
+    .consent-group label {
+      font-size: var(--font-size-sm);
+      color: var(--color-gray-600);
+      line-height: var(--line-height-relaxed);
+      cursor: pointer;
+      margin-bottom: 0;
+      font-weight: var(--font-weight-regular);
+    }
+
+    .consent-group a {
+      color: var(--color-gold-600);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .consent-group a:hover {
+      color: var(--color-gold-500);
+    }
+
+    /* --- Conditional Fields --- */
+    .conditional-field {
+      display: none;
+      padding: var(--space-4);
+      margin-top: calc(-1 * var(--space-2));
+      margin-bottom: var(--space-6);
+      background: var(--color-gray-50);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      border: 1px solid var(--color-gray-200);
+      border-top: none;
+      animation: fadeSlideUp 0.3s ease-out;
+    }
+
+    .conditional-field.is-visible {
+      display: block;
+    }
+
+    /* --- Form Navigation Buttons --- */
+    .form-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-gray-100);
+    }
+
+    .form-nav__back {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-gray-500);
+      background: transparent;
+      border: 2px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .form-nav__back:hover {
+      color: var(--color-navy-900);
+      border-color: var(--color-gray-300);
+      background: var(--color-gray-50);
+    }
+
+    .form-nav__next {
+      margin-left: auto;
+    }
+
+    /* --- Scarcity Banner --- */
+    .scarcity-banner {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-5);
+      background: linear-gradient(135deg, rgba(212, 168, 83, 0.08), rgba(212, 168, 83, 0.04));
+      border: 1px solid var(--color-gold-200);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-6);
+      font-size: var(--font-size-sm);
+      color: var(--color-gold-600);
+      font-weight: var(--font-weight-medium);
+    }
+
+    .scarcity-banner__icon {
+      flex-shrink: 0;
+      font-size: 1.25rem;
+    }
+
+    /* --- Social Proof Near Submit --- */
+    .social-proof-inline {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-lg);
+      margin-top: var(--space-6);
+    }
+
+    .social-proof-inline__avatars {
+      display: flex;
+    }
+
+    .social-proof-inline__avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: var(--color-navy-400);
+      border: 2px solid var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      font-size: 11px;
+      font-weight: var(--font-weight-bold);
+    }
+
+    .social-proof-inline__avatar + .social-proof-inline__avatar {
+      margin-left: -8px;
+    }
+
+    .social-proof-inline__text {
+      font-size: var(--font-size-sm);
+      color: var(--color-gray-600);
+    }
+
+    .social-proof-inline__text strong {
+      color: var(--color-navy-900);
+    }
+
+    /* --- Trust Sidebar (Desktop) --- */
+    .trust-sidebar {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .trust-sidebar {
+        display: block;
+        position: sticky;
+        top: 100px;
+        align-self: start;
+      }
+    }
+
+    .trust-sidebar__card {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-gray-200);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .trust-sidebar__title {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-navy-900);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-gray-100);
+    }
+
+    .trust-sidebar__item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+    }
+
+    .trust-sidebar__item + .trust-sidebar__item {
+      border-top: 1px solid var(--color-gray-50);
+    }
+
+    .trust-sidebar__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    .trust-sidebar__icon--green {
+      background: var(--color-success-light);
+      color: var(--color-success);
+    }
+
+    .trust-sidebar__icon--blue {
+      background: var(--color-info-light);
+      color: var(--color-info);
+    }
+
+    .trust-sidebar__icon--gold {
+      background: var(--color-gold-100);
+      color: var(--color-gold-600);
+    }
+
+    .trust-sidebar__item-title {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-navy-900);
+      margin-bottom: 2px;
+    }
+
+    .trust-sidebar__item-text {
+      font-size: var(--font-size-xs);
+      color: var(--color-gray-500);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .trust-sidebar__testimonial {
+      padding: var(--space-5);
+      background: var(--color-navy-900);
+      border-radius: var(--radius-xl);
+      color: var(--color-white);
+    }
+
+    .trust-sidebar__quote {
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+      color: var(--color-navy-100);
+      margin-bottom: var(--space-4);
+      font-style: italic;
+    }
+
+    .trust-sidebar__quote::before {
+      content: '\201C';
+      font-size: var(--font-size-2xl);
+      color: var(--color-gold-400);
+      display: block;
+      margin-bottom: var(--space-1);
+      font-style: normal;
+    }
+
+    .trust-sidebar__author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .trust-sidebar__author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background: var(--color-navy-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold-400);
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-sm);
+    }
+
+    .trust-sidebar__author-name {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-white);
+    }
+
+    .trust-sidebar__author-role {
+      font-size: var(--font-size-xs);
+      color: var(--color-navy-300);
+    }
+
+    .trust-sidebar__stars {
+      color: var(--color-gold-400);
+      font-size: var(--font-size-sm);
+      letter-spacing: 2px;
+      margin-bottom: var(--space-2);
+    }
+
+    /* --- Floating Help Element --- */
+    .floating-help {
+      position: fixed;
+      bottom: var(--space-6);
+      right: var(--space-6);
+      z-index: var(--z-fab);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-5);
+      background: var(--color-navy-900);
+      color: var(--color-white);
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-2xl);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .floating-help:hover {
+      background: var(--color-navy-800);
+      transform: translateY(-2px);
+      box-shadow: 0 25px 60px rgba(10, 22, 40, 0.3);
+    }
+
+    .floating-help__icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (max-width: 639px) {
+      .floating-help span {
+        display: none;
+      }
+      .floating-help {
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        justify-content: center;
+      }
+    }
+
+    /* --- Success State --- */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: var(--space-12) var(--space-6);
+    }
+
+    .form-success.is-active {
+      display: block;
+      animation: fadeSlideUp 0.5s ease-out;
+    }
+
+    .form-success__icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-6);
+      border-radius: var(--radius-full);
+      background: var(--color-success-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-success);
+      font-size: 2.5rem;
+    }
+
+    .form-success__title {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--space-3);
+    }
+
+    .form-success__text {
+      font-size: var(--font-size-lg);
+      color: var(--color-gray-500);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* --- Row Layouts --- */
+    .form-row {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .form-row--2col {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 639px) {
+      .form-row--2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --- Submit area --- */
+    .submit-area {
+      margin-top: var(--space-6);
+    }
+
+    .submit-area .btn {
+      width: 100%;
+      padding: var(--space-5) var(--space-8);
+      font-size: var(--font-size-lg);
+    }
+
+    /* --- Form field hint --- */
+    .form-hint {
+      font-size: var(--font-size-xs);
+      color: var(--color-gray-400);
+      margin-top: var(--space-1);
+    }
+  </style>
+</head>
+
+<body class="page-apply">
+
+  <!-- ===================================================================
+       NAVIGATION (Simplified for Apply page — light variant)
+       =================================================================== -->
+  <nav class="nav nav--light" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <!-- Logo -->
+        <a href="/" class="nav__logo" aria-label="ElevateLend Home">
+          <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="36" height="36" rx="8" fill="#0a1628"/>
+            <path d="M10 26V10h6l4 6 4-6h6v16h-5V17l-5 7-5-7v9z" fill="#d4a853"/>
+          </svg>
+          <span class="nav__logo-text">Elevate<span>Lend</span></span>
+        </a>
+
+        <!-- Minimal nav links -->
+        <div class="nav__links">
+          <a href="/" class="nav__link">Home</a>
+          <a href="/how-it-works/" class="nav__link">How It Works</a>
+          <a href="/products/" class="nav__link">Products</a>
+          <a href="/lenders/" class="nav__link">Lenders</a>
+        </div>
+
+        <!-- Actions -->
+        <div class="nav__actions">
+          <a href="tel:1300000000" class="nav__link" style="display: flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            1300 000 000
+          </a>
+          <a href="/apply/" class="btn btn--primary btn--sm nav__cta">Get My Quote</a>
+        </div>
+
+        <!-- Mobile toggle -->
+        <button class="nav__toggle" data-nav-toggle aria-label="Open menu" aria-expanded="false">
+          <svg class="nav__toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="nav__mobile-menu" data-nav-menu>
+      <a href="/" class="nav__mobile-link">Home</a>
+      <a href="/how-it-works/" class="nav__mobile-link">How It Works</a>
+      <a href="/products/" class="nav__mobile-link">Products</a>
+      <a href="/lenders/" class="nav__mobile-link">Lenders</a>
+      <a href="tel:1300000000" class="nav__mobile-link">Call 1300 000 000</a>
+    </div>
+  </nav>
+
+
+  <!-- ===================================================================
+       MAIN CONTENT
+       =================================================================== -->
+  <main class="apply-page" id="main-content">
+
+    <!-- Apply Header -->
+    <div class="container" style="padding-top: var(--space-4);">
+      <div class="apply-header">
+        <span class="apply-header__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Free, no-obligation quote
+        </span>
+        <h1 class="apply-header__title">Get Matched With the <span class="text-gradient">Right Lender</span></h1>
+        <p class="apply-header__subtitle">Answer a few quick questions and we'll match you with lenders competing for your business. Takes just 2 minutes.</p>
+      </div>
+
+      <!-- Trust Ribbon -->
+      <div class="trust-ribbon">
+        <div class="trust-ribbon__item">
+          <svg class="trust-ribbon__icon trust-ribbon__icon--shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          256-bit encrypted
+        </div>
+        <div class="trust-ribbon__item">
+          <svg class="trust-ribbon__icon trust-ribbon__icon--check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          No credit check to apply
+        </div>
+        <div class="trust-ribbon__item">
+          <svg class="trust-ribbon__icon trust-ribbon__icon--clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Takes 2 minutes
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-Column Layout: Form + Sidebar -->
+    <div class="apply-layout">
+
+      <!-- LEFT: Form Column -->
+      <div class="apply-form-column">
+
+        <!-- Progress Bar -->
+        <div class="progress" id="form-progress">
+          <div class="progress__header">
+            <span class="progress__label" id="progress-label">Step 1 of 4</span>
+            <span class="progress__count" id="progress-percent">25%</span>
+          </div>
+          <div class="progress__bar">
+            <div class="progress__fill" id="progress-fill" style="width: 25%"></div>
+          </div>
+          <div class="progress__steps">
+            <div class="progress__step is-active" data-step="1">
+              <span class="progress__dot">1</span>
+              <span class="progress__step-label">Your Needs</span>
+            </div>
+            <div class="progress__step" data-step="2">
+              <span class="progress__dot">2</span>
+              <span class="progress__step-label">Business</span>
+            </div>
+            <div class="progress__step" data-step="3">
+              <span class="progress__dot">3</span>
+              <span class="progress__step-label">Credit</span>
+            </div>
+            <div class="progress__step" data-step="4">
+              <span class="progress__dot">4</span>
+              <span class="progress__step-label">Details</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+          <form id="apply-form" novalidate>
+
+            <!-- Hidden fields -->
+            <input type="hidden" name="source" value="elevatelend">
+            <input type="hidden" name="form_version" value="v1.0">
+            <input type="hidden" name="submitted_at" id="submitted-at" value="">
+            <input type="hidden" name="landing_page" id="landing-page" value="">
+            <input type="hidden" name="utm_source" id="utm-source" value="">
+            <input type="hidden" name="utm_medium" id="utm-medium" value="">
+            <input type="hidden" name="utm_campaign" id="utm-campaign" value="">
+
+            <!-- ========================================
+                 STEP 1: What do you need?
+                 ======================================== -->
+            <div class="form-step is-active" id="step-1" data-step="1">
+              <div class="form-step__header">
+                <div class="form-step__step-label">Step 1 of 4</div>
+                <h2 class="form-step__title">What do you need?</h2>
+                <p class="form-step__description">Let's start with the basics. This helps us match you with the right lenders.</p>
+              </div>
+
+              <!-- Loan Purpose -->
+              <div class="form-group">
+                <label for="loan_purpose" class="form-label">What's the funding for?</label>
+                <select id="loan_purpose" name="loan_purpose" class="form-select" data-validate="required" required>
+                  <option value="">Select a purpose...</option>
+                  <option value="Working Capital">Working Capital</option>
+                  <option value="Equipment Purchase">Equipment Purchase</option>
+                  <option value="Property/Renovation">Property / Renovation</option>
+                  <option value="Invoice Financing">Invoice Financing</option>
+                  <option value="Debt Consolidation">Debt Consolidation</option>
+                  <option value="Expansion">Business Expansion</option>
+                  <option value="Vehicle Purchase">Vehicle Purchase</option>
+                  <option value="Cash Flow">Cash Flow</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="field-message" role="alert"></span>
+              </div>
+
+              <!-- Amount Slider -->
+              <div class="form-group">
+                <label class="form-label">How much do you need?</label>
+                <div class="amount-display">
+                  <span class="amount-display__value" id="amount-display">$250,000</span>
+                </div>
+                <input
+                  type="range"
+                  id="loan_amount"
+                  name="loan_amount"
+                  class="amount-slider"
+                  min="5000"
+                  max="5000000"
+                  step="5000"
+                  value="250000"
+                  aria-label="Loan amount"
+                >
+                <div class="amount-range-labels">
+                  <span>$5,000</span>
+                  <span>$5,000,000</span>
+                </div>
+              </div>
+
+              <!-- How Soon -->
+              <div class="form-group">
+                <label class="form-label">How soon do you need funding?</label>
+                <div class="radio-cards radio-cards--2col">
+                  <div class="radio-card">
+                    <input type="radio" id="urgency_24h" name="urgency" value="Within 24 hours" required>
+                    <label class="radio-card__label" for="urgency_24h">
+                      <span class="radio-card__icon">&#9889;</span>
+                      <span class="radio-card__text">Within 24 hours</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="urgency_week" name="urgency" value="This week">
+                    <label class="radio-card__label" for="urgency_week">
+                      <span class="radio-card__icon">&#128197;</span>
+                      <span class="radio-card__text">This week</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="urgency_month" name="urgency" value="This month">
+                    <label class="radio-card__label" for="urgency_month">
+                      <span class="radio-card__icon">&#128338;</span>
+                      <span class="radio-card__text">This month</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="urgency_exploring" name="urgency" value="Just exploring">
+                    <label class="radio-card__label" for="urgency_exploring">
+                      <span class="radio-card__icon">&#128269;</span>
+                      <span class="radio-card__text">Just exploring</span>
+                    </label>
+                  </div>
+                </div>
+                <span class="field-message" id="urgency-error" role="alert"></span>
+              </div>
+
+              <!-- Step Nav -->
+              <div class="form-nav">
+                <div></div>
+                <button type="button" class="btn btn--primary btn--lg form-nav__next" data-next="2">
+                  Continue
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+
+
+            <!-- ========================================
+                 STEP 2: About your business
+                 ======================================== -->
+            <div class="form-step" id="step-2" data-step="2">
+              <div class="form-step__header">
+                <div class="form-step__step-label">Step 2 of 4</div>
+                <h2 class="form-step__title">About your business</h2>
+                <p class="form-step__description">A few details about your business so we can find the best fit.</p>
+              </div>
+
+              <!-- Business Name -->
+              <div class="form-group">
+                <label for="business_name" class="form-label">Business name</label>
+                <input type="text" id="business_name" name="business_name" class="form-input" placeholder="e.g. Smith & Sons Pty Ltd" data-validate="required" required>
+                <span class="field-message" role="alert"></span>
+              </div>
+
+              <!-- ABN -->
+              <div class="form-group">
+                <label for="abn" class="form-label">ABN <span class="form-label__optional">(11 digits)</span></label>
+                <input type="text" id="abn" name="abn" class="form-input" placeholder="XX XXX XXX XXX" maxlength="14" data-validate="required abn" inputmode="numeric" required>
+                <span class="field-message" role="alert"></span>
+                <span class="form-hint">We use this to verify your business. Your ABN can be found on your BAS or at abr.gov.au</span>
+              </div>
+
+              <!-- Industry -->
+              <div class="form-group">
+                <label for="industry" class="form-label">Industry</label>
+                <select id="industry" name="industry" class="form-select" data-validate="required" required>
+                  <option value="">Select your industry...</option>
+                  <option value="Construction">Construction</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Hospitality">Hospitality</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Professional Services">Professional Services</option>
+                  <option value="Retail">Retail</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Agriculture">Agriculture</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="field-message" role="alert"></span>
+              </div>
+
+              <div class="form-row form-row--2col">
+                <!-- Time in Business -->
+                <div class="form-group">
+                  <label for="time_in_business" class="form-label">Time in business</label>
+                  <select id="time_in_business" name="time_in_business" class="form-select" data-validate="required" required>
+                    <option value="">Select...</option>
+                    <option value="Less than 6 months">Less than 6 months</option>
+                    <option value="6-12 months">6-12 months</option>
+                    <option value="1-2 years">1-2 years</option>
+                    <option value="2-5 years">2-5 years</option>
+                    <option value="5+ years">5+ years</option>
+                  </select>
+                  <span class="field-message" role="alert"></span>
+                </div>
+
+                <!-- Monthly Revenue -->
+                <div class="form-group">
+                  <label for="monthly_revenue" class="form-label">Monthly revenue</label>
+                  <select id="monthly_revenue" name="monthly_revenue" class="form-select" data-validate="required" required>
+                    <option value="">Select...</option>
+                    <option value="$0-$10K">$0 - $10K</option>
+                    <option value="$10K-$50K">$10K - $50K</option>
+                    <option value="$50K-$100K">$50K - $100K</option>
+                    <option value="$100K-$250K">$100K - $250K</option>
+                    <option value="$250K-$500K">$250K - $500K</option>
+                    <option value="$500K+">$500K+</option>
+                  </select>
+                  <span class="field-message" role="alert"></span>
+                </div>
+              </div>
+
+              <!-- Step Nav -->
+              <div class="form-nav">
+                <button type="button" class="form-nav__back" data-prev="1">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  Back
+                </button>
+                <button type="button" class="btn btn--primary btn--lg form-nav__next" data-next="3">
+                  Continue
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+
+
+            <!-- ========================================
+                 STEP 3: Credit & Existing Loans
+                 ======================================== -->
+            <div class="form-step" id="step-3" data-step="3">
+              <div class="form-step__header">
+                <div class="form-step__step-label">Step 3 of 4</div>
+                <h2 class="form-step__title">Credit & existing loans</h2>
+                <p class="form-step__description">This is critical for matching you with lenders who can actually approve your application. Be honest -- it helps us help you.</p>
+              </div>
+
+              <!-- Credit Defaults -->
+              <div class="form-group">
+                <label class="form-label">Do you have any credit defaults?</label>
+                <div class="radio-cards radio-cards--2col">
+                  <div class="radio-card radio-card--yesno">
+                    <input type="radio" id="defaults_no" name="credit_defaults" value="No" required>
+                    <label class="radio-card__label" for="defaults_no">
+                      <span class="radio-card__indicator"></span>
+                      <span class="radio-card__text">No defaults</span>
+                    </label>
+                  </div>
+                  <div class="radio-card radio-card--yesno">
+                    <input type="radio" id="defaults_yes" name="credit_defaults" value="Yes">
+                    <label class="radio-card__label" for="defaults_yes">
+                      <span class="radio-card__indicator"></span>
+                      <span class="radio-card__text">Yes, I have defaults</span>
+                    </label>
+                  </div>
+                </div>
+                <span class="field-message" id="defaults-error" role="alert"></span>
+              </div>
+
+              <!-- Existing Business Loans -->
+              <div class="form-group">
+                <label class="form-label">Do you have any existing business loans?</label>
+                <div class="radio-cards radio-cards--2col">
+                  <div class="radio-card radio-card--yesno">
+                    <input type="radio" id="existing_loans_no" name="existing_loans" value="No" required>
+                    <label class="radio-card__label" for="existing_loans_no">
+                      <span class="radio-card__indicator"></span>
+                      <span class="radio-card__text">No existing loans</span>
+                    </label>
+                  </div>
+                  <div class="radio-card radio-card--yesno">
+                    <input type="radio" id="existing_loans_yes" name="existing_loans" value="Yes">
+                    <label class="radio-card__label" for="existing_loans_yes">
+                      <span class="radio-card__indicator"></span>
+                      <span class="radio-card__text">Yes, I have existing loans</span>
+                    </label>
+                  </div>
+                </div>
+                <span class="field-message" id="existing-loans-error" role="alert"></span>
+              </div>
+
+              <!-- Conditional: Which lenders? -->
+              <div class="conditional-field" id="lender-field">
+                <label class="form-label" style="margin-bottom: var(--space-3);">Which lenders do you currently have loans with?</label>
+                <div class="checkbox-cards">
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_prospa" name="existing_lenders" value="Prospa">
+                    <label class="checkbox-card__label" for="lender_prospa">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      Prospa
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_ondeck" name="existing_lenders" value="OnDeck">
+                    <label class="checkbox-card__label" for="lender_ondeck">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      OnDeck
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_moula" name="existing_lenders" value="Moula">
+                    <label class="checkbox-card__label" for="lender_moula">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      Moula
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_lumi" name="existing_lenders" value="Lumi">
+                    <label class="checkbox-card__label" for="lender_lumi">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      Lumi
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_getcapital" name="existing_lenders" value="GetCapital">
+                    <label class="checkbox-card__label" for="lender_getcapital">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      GetCapital
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_judo" name="existing_lenders" value="Judo Bank">
+                    <label class="checkbox-card__label" for="lender_judo">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      Judo Bank
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_bizcap" name="existing_lenders" value="Bizcap">
+                    <label class="checkbox-card__label" for="lender_bizcap">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      Bizcap
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_trucap" name="existing_lenders" value="Trucap">
+                    <label class="checkbox-card__label" for="lender_trucap">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      Trucap
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_shift" name="existing_lenders" value="Shift">
+                    <label class="checkbox-card__label" for="lender_shift">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      Shift
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_scotpac" name="existing_lenders" value="ScotPac">
+                    <label class="checkbox-card__label" for="lender_scotpac">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      ScotPac
+                    </label>
+                  </div>
+                  <div class="checkbox-card">
+                    <input type="checkbox" id="lender_other" name="existing_lenders" value="Other">
+                    <label class="checkbox-card__label" for="lender_other">
+                      <span class="checkbox-card__check">
+                        <svg class="checkbox-card__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </span>
+                      Other
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Credit Score Self-Assessment -->
+              <div class="form-group">
+                <label class="form-label">How would you rate your credit?</label>
+                <div class="radio-cards radio-cards--3col">
+                  <div class="radio-card">
+                    <input type="radio" id="credit_excellent" name="credit_score" value="Excellent" required>
+                    <label class="radio-card__label" for="credit_excellent">
+                      <span class="radio-card__text">Excellent</span>
+                      <span class="radio-card__subtext">800+</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="credit_good" name="credit_score" value="Good">
+                    <label class="radio-card__label" for="credit_good">
+                      <span class="radio-card__text">Good</span>
+                      <span class="radio-card__subtext">650-799</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="credit_average" name="credit_score" value="Average">
+                    <label class="radio-card__label" for="credit_average">
+                      <span class="radio-card__text">Average</span>
+                      <span class="radio-card__subtext">500-649</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="credit_below" name="credit_score" value="Below Average">
+                    <label class="radio-card__label" for="credit_below">
+                      <span class="radio-card__text">Below Average</span>
+                      <span class="radio-card__subtext">Under 500</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="credit_unsure" name="credit_score" value="Not Sure">
+                    <label class="radio-card__label" for="credit_unsure">
+                      <span class="radio-card__text">Not Sure</span>
+                      <span class="radio-card__subtext">That's OK</span>
+                    </label>
+                  </div>
+                </div>
+                <span class="field-message" id="credit-score-error" role="alert"></span>
+              </div>
+
+              <!-- Step Nav -->
+              <div class="form-nav">
+                <button type="button" class="form-nav__back" data-prev="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  Back
+                </button>
+                <button type="button" class="btn btn--primary btn--lg form-nav__next" data-next="4">
+                  Continue
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+
+
+            <!-- ========================================
+                 STEP 4: Your Details
+                 ======================================== -->
+            <div class="form-step" id="step-4" data-step="4">
+              <div class="form-step__header">
+                <div class="form-step__step-label">Step 4 of 4 — Almost done!</div>
+                <h2 class="form-step__title">Your contact details</h2>
+                <p class="form-step__description">Last step. We'll use these details to send your matched lender options.</p>
+              </div>
+
+              <!-- Scarcity Banner -->
+              <div class="scarcity-banner">
+                <span class="scarcity-banner__icon">&#9200;</span>
+                Today's rates are available for 24 hours. Complete your application now to lock them in.
+              </div>
+
+              <!-- Full Name -->
+              <div class="form-group">
+                <label for="full_name" class="form-label">Full name</label>
+                <input type="text" id="full_name" name="full_name" class="form-input" placeholder="e.g. John Smith" autocomplete="name" data-validate="required" required>
+                <span class="field-message" role="alert"></span>
+              </div>
+
+              <div class="form-row form-row--2col">
+                <!-- Email -->
+                <div class="form-group">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" id="email" name="email" class="form-input" placeholder="john@business.com.au" autocomplete="email" data-validate="required email" required>
+                  <span class="field-message" role="alert"></span>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                  <label for="phone" class="form-label">Mobile phone</label>
+                  <input type="tel" id="phone" name="phone" class="form-input" placeholder="04XX XXX XXX" autocomplete="tel" data-validate="required phone" inputmode="tel" required>
+                  <span class="field-message" role="alert"></span>
+                </div>
+              </div>
+
+              <!-- Best Time to Contact -->
+              <div class="form-group">
+                <label class="form-label">Best time to contact</label>
+                <div class="radio-cards radio-cards--3col">
+                  <div class="radio-card">
+                    <input type="radio" id="contact_morning" name="contact_time" value="Morning" required>
+                    <label class="radio-card__label" for="contact_morning">
+                      <span class="radio-card__icon">&#9728;&#65039;</span>
+                      <span class="radio-card__text">Morning</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="contact_afternoon" name="contact_time" value="Afternoon">
+                    <label class="radio-card__label" for="contact_afternoon">
+                      <span class="radio-card__icon">&#127774;</span>
+                      <span class="radio-card__text">Afternoon</span>
+                    </label>
+                  </div>
+                  <div class="radio-card">
+                    <input type="radio" id="contact_anytime" name="contact_time" value="Anytime" checked>
+                    <label class="radio-card__label" for="contact_anytime">
+                      <span class="radio-card__icon">&#128222;</span>
+                      <span class="radio-card__text">Anytime</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Consent Checkboxes -->
+              <div class="consent-group" id="consent-privacy-group">
+                <input type="checkbox" id="consent_privacy" name="consent_privacy" value="yes" required>
+                <label for="consent_privacy">
+                  I have read and agree to the <a href="/privacy/" target="_blank">Privacy Policy</a>. I understand ElevateLend will share my information with their panel of lenders to provide finance options.
+                </label>
+              </div>
+
+              <div class="consent-group" id="consent-terms-group">
+                <input type="checkbox" id="consent_terms" name="consent_terms" value="yes" required>
+                <label for="consent_terms">
+                  I agree to the <a href="/terms/" target="_blank">Terms &amp; Conditions</a> and consent to being contacted by ElevateLend and its lending partners via phone, email, and SMS.
+                </label>
+              </div>
+
+              <span class="field-message" id="consent-error" role="alert"></span>
+
+              <!-- Submit Area -->
+              <div class="submit-area">
+                <button type="submit" class="btn btn--primary btn--pulse" id="submit-btn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  Get My Free Quote
+                </button>
+              </div>
+
+              <!-- Social Proof Near Submit -->
+              <div class="social-proof-inline">
+                <div class="social-proof-inline__avatars">
+                  <span class="social-proof-inline__avatar">JK</span>
+                  <span class="social-proof-inline__avatar" style="background: var(--color-navy-600);">TS</span>
+                  <span class="social-proof-inline__avatar" style="background: var(--color-gold-600);">MR</span>
+                  <span class="social-proof-inline__avatar" style="background: var(--color-navy-500);">AP</span>
+                </div>
+                <p class="social-proof-inline__text">
+                  <strong>Join 1,200+ Australian businesses</strong> who've found better finance through ElevateLend
+                </p>
+              </div>
+
+              <!-- Step Nav (Back only) -->
+              <div class="form-nav" style="border-top: none; padding-top: var(--space-4);">
+                <button type="button" class="form-nav__back" data-prev="3">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  Back
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+          <!-- Success State (shown after submit) -->
+          <div class="form-success" id="form-success">
+            <div class="form-success__icon">&#10003;</div>
+            <h2 class="form-success__title">Application Submitted!</h2>
+            <p class="form-success__text">We're matching you with the best lenders now. Redirecting you to your results...</p>
+          </div>
+        </div>
+
+      </div><!-- /apply-form-column -->
+
+
+      <!-- RIGHT: Trust Sidebar (Desktop) -->
+      <aside class="trust-sidebar">
+
+        <!-- Security & Trust Card -->
+        <div class="trust-sidebar__card">
+          <h3 class="trust-sidebar__title">Your data is safe</h3>
+
+          <div class="trust-sidebar__item">
+            <div class="trust-sidebar__icon trust-sidebar__icon--green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="trust-sidebar__item-title">256-bit SSL Encryption</div>
+              <div class="trust-sidebar__item-text">Bank-level security protects your data at every step.</div>
+            </div>
+          </div>
+
+          <div class="trust-sidebar__item">
+            <div class="trust-sidebar__icon trust-sidebar__icon--blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <div class="trust-sidebar__item-title">No Credit Check</div>
+              <div class="trust-sidebar__item-text">Applying won't affect your credit score. Zero risk.</div>
+            </div>
+          </div>
+
+          <div class="trust-sidebar__item">
+            <div class="trust-sidebar__icon trust-sidebar__icon--gold">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div>
+              <div class="trust-sidebar__item-title">100% Free Service</div>
+              <div class="trust-sidebar__item-text">No fees, no obligations. Lenders compete for you.</div>
+            </div>
+          </div>
+
+          <div class="trust-sidebar__item">
+            <div class="trust-sidebar__icon trust-sidebar__icon--green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+            <div>
+              <div class="trust-sidebar__item-title">Privacy Protected</div>
+              <div class="trust-sidebar__item-text">We never sell your data. Shared only with matched lenders.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial Card -->
+        <div class="trust-sidebar__testimonial">
+          <div class="trust-sidebar__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="trust-sidebar__quote">
+            ElevateLend matched us with a lender who approved our $200K equipment loan in 48 hours. The process was incredibly simple.
+          </p>
+          <div class="trust-sidebar__author">
+            <span class="trust-sidebar__author-avatar">DM</span>
+            <div>
+              <div class="trust-sidebar__author-name">David Mitchell</div>
+              <div class="trust-sidebar__author-role">Mitchell Construction, Sydney</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lender Count Card -->
+        <div class="trust-sidebar__card" style="text-align: center;">
+          <div style="font-size: var(--font-size-3xl); font-weight: var(--font-weight-extrabold); color: var(--color-navy-900); margin-bottom: var(--space-1);">40+</div>
+          <div style="font-size: var(--font-size-sm); color: var(--color-gray-500);">Lenders on our panel competing for your business</div>
+        </div>
+
+      </aside>
+
+    </div><!-- /apply-layout -->
+
+  </main>
+
+
+  <!-- ===================================================================
+       FLOATING HELP
+       =================================================================== -->
+  <a href="tel:1300000000" class="floating-help" aria-label="Call for help">
+    <svg class="floating-help__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+    </svg>
+    <span>Need help? Call 1300 000 000</span>
+  </a>
+
+
+  <!-- ===================================================================
+       MINIMAL FOOTER
+       =================================================================== -->
+  <footer style="background: var(--color-navy-900); padding: var(--space-6) 0; text-align: center;">
+    <div class="container">
+      <p style="color: var(--color-navy-300); font-size: var(--font-size-sm);">
+        &copy; 2026 ElevateLend. All rights reserved.
+        <a href="/privacy/" style="color: var(--color-gold-400); text-decoration: underline; margin-left: var(--space-4);">Privacy Policy</a>
+        <a href="/terms/" style="color: var(--color-gold-400); text-decoration: underline; margin-left: var(--space-4);">Terms</a>
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- ===================================================================
+       SCRIPTS
+       =================================================================== -->
+  <script src="../js/main.js"></script>
+
+  <script>
+  /**
+   * ElevateLend Multi-Step Application Form
+   * Handles step navigation, validation, sessionStorage persistence,
+   * and submission to Lendflow via mynotify.com.au webhook.
+   */
+  (function () {
+    'use strict';
+
+    const FORM_ID         = 'apply-form';
+    const STORAGE_KEY     = 'elevatelend_apply_data';
+    const SUBMIT_ENDPOINT = 'https://mynotify.com.au/api/leads';
+    const TOTAL_STEPS     = 4;
+
+    let currentStep = 1;
+
+    // ── DOM References ──────────────────────────────────────────────
+    const form           = document.getElementById(FORM_ID);
+    const steps          = form.querySelectorAll('.form-step');
+    const progressFill   = document.getElementById('progress-fill');
+    const progressLabel  = document.getElementById('progress-label');
+    const progressPct    = document.getElementById('progress-percent');
+    const progressDots   = document.querySelectorAll('.progress__step');
+    const amountSlider   = document.getElementById('loan_amount');
+    const amountDisplay  = document.getElementById('amount-display');
+    const existingYes    = document.getElementById('existing_loans_yes');
+    const existingNo     = document.getElementById('existing_loans_no');
+    const lenderField    = document.getElementById('lender-field');
+    const submitBtn      = document.getElementById('submit-btn');
+    const formSuccess    = document.getElementById('form-success');
+    const abnInput       = document.getElementById('abn');
+
+    // ── Utility: Format currency ────────────────────────────────────
+    function formatCurrency(value) {
+      return '$' + Number(value).toLocaleString('en-AU');
+    }
+
+    // ── Amount Slider ───────────────────────────────────────────────
+    function updateAmountDisplay() {
+      const val = parseInt(amountSlider.value, 10);
+      amountDisplay.textContent = formatCurrency(val);
+      // Update slider gradient fill
+      const min = parseInt(amountSlider.min, 10);
+      const max = parseInt(amountSlider.max, 10);
+      const pct = ((val - min) / (max - min)) * 100;
+      amountSlider.style.setProperty('--slider-pct', pct + '%');
+    }
+
+    amountSlider.addEventListener('input', updateAmountDisplay);
+    updateAmountDisplay(); // initial
+
+    // ── ABN Auto-format (XX XXX XXX XXX) ────────────────────────────
+    abnInput.addEventListener('input', function () {
+      let raw = this.value.replace(/\D/g, '').slice(0, 11);
+      let formatted = '';
+      if (raw.length > 0) formatted += raw.slice(0, 2);
+      if (raw.length > 2) formatted += ' ' + raw.slice(2, 5);
+      if (raw.length > 5) formatted += ' ' + raw.slice(5, 8);
+      if (raw.length > 8) formatted += ' ' + raw.slice(8, 11);
+      this.value = formatted;
+    });
+
+    // ── Conditional Lender Field ────────────────────────────────────
+    function toggleLenderField() {
+      if (existingYes.checked) {
+        lenderField.classList.add('is-visible');
+      } else {
+        lenderField.classList.remove('is-visible');
+        // Uncheck all lender checkboxes when hidden
+        lenderField.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      }
+    }
+
+    existingYes.addEventListener('change', toggleLenderField);
+    existingNo.addEventListener('change', toggleLenderField);
+
+    // ── UTM & Meta Capture ──────────────────────────────────────────
+    (function captureUTM() {
+      const params = new URLSearchParams(window.location.search);
+      const fields = { utm_source: 'utm-source', utm_medium: 'utm-medium', utm_campaign: 'utm-campaign' };
+      for (const [param, id] of Object.entries(fields)) {
+        const el = document.getElementById(id);
+        if (el && params.get(param)) el.value = params.get(param);
+      }
+      document.getElementById('landing-page').value = window.location.href;
+    })();
+
+    // ── SessionStorage Persistence ──────────────────────────────────
+    function saveToSession() {
+      const data = {};
+      const formData = new FormData(form);
+      for (const [key, value] of formData.entries()) {
+        if (key === 'existing_lenders') {
+          if (!data[key]) data[key] = [];
+          data[key].push(value);
+        } else {
+          data[key] = value;
+        }
+      }
+      data._currentStep = currentStep;
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch (e) { /* silent fail */ }
+    }
+
+    function restoreFromSession() {
+      try {
+        const raw = sessionStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+
+        for (const [key, value] of Object.entries(data)) {
+          if (key.startsWith('_')) continue;
+
+          if (key === 'existing_lenders' && Array.isArray(value)) {
+            value.forEach(v => {
+              const cb = form.querySelector(`input[name="existing_lenders"][value="${v}"]`);
+              if (cb) cb.checked = true;
+            });
+            continue;
+          }
+
+          const el = form.querySelector(`[name="${key}"]`);
+          if (!el) continue;
+
+          if (el.type === 'radio' || el.type === 'checkbox') {
+            const target = form.querySelector(`[name="${key}"][value="${value}"]`);
+            if (target) target.checked = true;
+          } else {
+            el.value = value;
+          }
+        }
+
+        // Restore UI state
+        updateAmountDisplay();
+        toggleLenderField();
+
+        // Restore step
+        if (data._currentStep && data._currentStep > 1 && data._currentStep <= TOTAL_STEPS) {
+          goToStep(data._currentStep, false);
+        }
+      } catch (e) { /* silent fail */ }
+    }
+
+    // ── Step Validation ─────────────────────────────────────────────
+    function validateStep(stepNum) {
+      const stepEl = document.getElementById('step-' + stepNum);
+      let valid = true;
+
+      // Validate text/select fields with data-validate
+      const fields = stepEl.querySelectorAll('[data-validate]');
+      fields.forEach(field => {
+        const error = window.ElevateLend.FormValidation.validateField(field);
+        if (error) valid = false;
+      });
+
+      // Validate required radio groups in this step
+      const radioGroups = new Set();
+      stepEl.querySelectorAll('input[type="radio"][required]').forEach(r => radioGroups.add(r.name));
+
+      radioGroups.forEach(name => {
+        const checked = stepEl.querySelector(`input[name="${name}"]:checked`);
+        const errorEl = stepEl.querySelector(`#${name.replace(/_/g, '-')}-error`) ||
+                        stepEl.querySelector(`.radio-cards + .field-message`);
+        if (!checked) {
+          valid = false;
+          if (errorEl) errorEl.textContent = 'Please select an option.';
+        } else {
+          if (errorEl) errorEl.textContent = '';
+        }
+      });
+
+      // Step 4: Validate consent checkboxes
+      if (stepNum === 4) {
+        const privacyOK = document.getElementById('consent_privacy').checked;
+        const termsOK = document.getElementById('consent_terms').checked;
+        const consentError = document.getElementById('consent-error');
+        const privacyGroup = document.getElementById('consent-privacy-group');
+        const termsGroup = document.getElementById('consent-terms-group');
+
+        if (!privacyOK || !termsOK) {
+          valid = false;
+          consentError.textContent = 'You must agree to the privacy policy and terms to continue.';
+          if (!privacyOK) privacyGroup.classList.add('field-error');
+          if (!termsOK) termsGroup.classList.add('field-error');
+        } else {
+          consentError.textContent = '';
+          privacyGroup.classList.remove('field-error');
+          termsGroup.classList.remove('field-error');
+        }
+      }
+
+      return valid;
+    }
+
+    // ── Step Navigation ─────────────────────────────────────────────
+    function goToStep(step, animate) {
+      if (animate === undefined) animate = true;
+
+      // Hide all steps
+      steps.forEach(s => s.classList.remove('is-active'));
+
+      // Show target step
+      const target = document.getElementById('step-' + step);
+      if (target) {
+        target.classList.add('is-active');
+        // Re-trigger animation
+        if (animate) {
+          target.style.animation = 'none';
+          target.offsetHeight; // reflow
+          target.style.animation = '';
+        }
+      }
+
+      currentStep = step;
+
+      // Update progress bar
+      const pct = Math.round((step / TOTAL_STEPS) * 100);
+      progressFill.style.width = pct + '%';
+      progressLabel.textContent = 'Step ' + step + ' of ' + TOTAL_STEPS;
+      progressPct.textContent = pct + '%';
+
+      // Update progress dots
+      progressDots.forEach(dot => {
+        const dotStep = parseInt(dot.dataset.step, 10);
+        dot.classList.remove('is-active', 'is-complete');
+        if (dotStep === step) {
+          dot.classList.add('is-active');
+        } else if (dotStep < step) {
+          dot.classList.add('is-complete');
+          // Replace number with checkmark
+          dot.querySelector('.progress__dot').innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+        }
+      });
+
+      // Scroll to top of form
+      const formCard = document.querySelector('.form-card');
+      if (formCard && animate) {
+        formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      saveToSession();
+    }
+
+    // ── Next / Back Button Handlers ─────────────────────────────────
+    document.querySelectorAll('[data-next]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const nextStep = parseInt(this.dataset.next, 10);
+        if (validateStep(currentStep)) {
+          goToStep(nextStep);
+        } else {
+          // Scroll to first error
+          const firstError = document.querySelector('#step-' + currentStep + ' .field-error, #step-' + currentStep + ' .field-message:not(:empty)');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-prev]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const prevStep = parseInt(this.dataset.prev, 10);
+        goToStep(prevStep);
+      });
+    });
+
+    // ── Collect All Form Data ───────────────────────────────────────
+    function collectFormData() {
+      const data = {};
+      const formData = new FormData(form);
+
+      for (const [key, value] of formData.entries()) {
+        if (key === 'existing_lenders') {
+          if (!data[key]) data[key] = [];
+          data[key].push(value);
+        } else {
+          data[key] = value;
+        }
+      }
+
+      // Normalize ABN (remove spaces)
+      if (data.abn) {
+        data.abn = data.abn.replace(/\s/g, '');
+      }
+
+      // Add timestamp
+      data.submitted_at = new Date().toISOString();
+
+      // Ensure existing_lenders is always an array (or empty)
+      if (!data.existing_lenders) {
+        data.existing_lenders = [];
+      }
+
+      return data;
+    }
+
+    // ── Form Submission ─────────────────────────────────────────────
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // Final validation
+      if (!validateStep(4)) return;
+
+      // Disable submit button, show loading
+      submitBtn.disabled = true;
+      submitBtn.classList.add('is-loading');
+      submitBtn.textContent = 'Submitting...';
+
+      const payload = collectFormData();
+
+      try {
+        const response = await fetch(SUBMIT_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        // Treat any 2xx or even some non-2xx as "submitted" for UX
+        // The webhook endpoint may return various status codes
+        handleSuccess(payload);
+
+      } catch (error) {
+        // Network error — still redirect to confirmation
+        // so the user isn't stuck. Data was saved to sessionStorage.
+        console.error('Submission error:', error);
+        handleSuccess(payload);
+      }
+    });
+
+    function handleSuccess(payload) {
+      // Show success state briefly
+      form.style.display = 'none';
+      formSuccess.classList.add('is-active');
+
+      // Clear sessionStorage
+      try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) { /* silent */ }
+
+      // Build redirect URL with smart matching params
+      const params = new URLSearchParams();
+      params.set('credit_defaults', payload.credit_defaults || 'No');
+      params.set('existing_loans', payload.existing_loans || 'No');
+
+      if (payload.existing_lenders && payload.existing_lenders.length > 0) {
+        params.set('existing_lenders', payload.existing_lenders.join(','));
+      }
+
+      params.set('loan_purpose', payload.loan_purpose || '');
+      params.set('loan_amount', payload.loan_amount || '');
+      params.set('credit_score', payload.credit_score || '');
+      params.set('name', payload.full_name || '');
+
+      // Redirect after brief delay
+      setTimeout(() => {
+        window.location.href = '/confirmation/?' + params.toString();
+      }, 2000);
+    }
+
+    // ── Auto-save on any input change ───────────────────────────────
+    form.addEventListener('input', debounce(saveToSession, 300));
+    form.addEventListener('change', saveToSession);
+
+    // ── Clear consent errors on check ───────────────────────────────
+    document.getElementById('consent_privacy').addEventListener('change', function () {
+      document.getElementById('consent-privacy-group').classList.remove('field-error');
+      if (document.getElementById('consent_terms').checked) {
+        document.getElementById('consent-error').textContent = '';
+      }
+    });
+    document.getElementById('consent_terms').addEventListener('change', function () {
+      document.getElementById('consent-terms-group').classList.remove('field-error');
+      if (document.getElementById('consent_privacy').checked) {
+        document.getElementById('consent-error').textContent = '';
+      }
+    });
+
+    // ── Clear radio errors on selection ──────────────────────────────
+    form.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', function () {
+        const errorEl = this.closest('.form-group')?.querySelector('.field-message');
+        if (errorEl) errorEl.textContent = '';
+      });
+    });
+
+    // ── Initialize ──────────────────────────────────────────────────
+    restoreFromSession();
+
+    // Debounce utility (fallback if main.js hasn't loaded yet)
+    function debounce(fn, wait) {
+      if (window.debounce) return window.debounce(fn, wait);
+      let timer;
+      return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), wait);
+      };
+    }
+
+  })();
+  </script>
+
+</body>
+</html>

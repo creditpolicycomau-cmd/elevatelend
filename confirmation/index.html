@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're Matched — ElevateLend</title>
+  <meta name="description" content="Great news! You've been matched with top business lenders. A specialist will contact you within 2 hours." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <style>
+    /* ---- Confirmation-page-specific styles ---- */
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* Animated checkmark */
+    .confirmation__checkmark {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-6);
+      position: relative;
+    }
+
+    .checkmark-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--color-success-light), #a7f3d0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .checkmark-circle svg {
+      width: 40px;
+      height: 40px;
+      color: var(--color-success);
+      animation: fadeIn 0.4s ease-out 0.4s both;
+    }
+
+    .checkmark-circle::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: var(--radius-full);
+      border: 2px solid var(--color-success);
+      opacity: 0;
+      animation: pulse-ring 2s ease-out 0.8s infinite;
+    }
+
+    /* Contact time badge */
+    .confirmation__contact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-5);
+      background-color: var(--color-info-light);
+      border: 1px solid #93c5fd;
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: #1e40af;
+      margin-top: var(--space-4);
+    }
+
+    .confirmation__contact-badge svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Lender match cards — enhanced */
+    .match-card__logo-placeholder {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-white);
+      flex-shrink: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .match-card__logo-placeholder--prospa {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+    }
+
+    .match-card__logo-placeholder--trucap {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    }
+
+    .match-card__logo-placeholder--bizcap {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+    }
+
+    .match-card__logo-placeholder--shift {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .match-card__match-bar {
+      width: 100%;
+      height: 6px;
+      background-color: var(--color-gray-100);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-top: var(--space-2);
+    }
+
+    .match-card__match-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      background: linear-gradient(90deg, var(--color-success), #34d399);
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 0;
+    }
+
+    .match-card__why {
+      padding: var(--space-3) var(--space-4);
+      background-color: var(--color-gold-50);
+      border-left: 3px solid var(--color-gold-400);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-size: var(--font-size-sm);
+      color: var(--color-gray-600);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .match-card__why strong {
+      color: var(--color-navy-900);
+      display: block;
+      margin-bottom: var(--space-1);
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wider);
+    }
+
+    /* Next steps — animated states */
+    .next-step--active {
+      border-color: var(--color-gold-300);
+      background-color: var(--color-gold-50);
+    }
+
+    .next-step--active .next-step__number {
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    .next-step__spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--color-gray-200);
+      border-top-color: var(--color-gold-400);
+      border-radius: var(--radius-full);
+      animation: spin 0.8s linear infinite;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .next-step__check {
+      width: 18px;
+      height: 18px;
+      color: var(--color-success);
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    /* Application summary */
+    .app-summary {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      max-width: 800px;
+      margin: var(--space-8) auto 0;
+    }
+
+    .app-summary__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--color-gray-100);
+    }
+
+    .app-summary__title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .app-summary__ref {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-gold-500);
+      font-family: monospace;
+    }
+
+    .app-summary__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+
+    .app-summary__item-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wider);
+      margin-bottom: var(--space-1);
+    }
+
+    .app-summary__item-value {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-navy-900);
+    }
+
+    /* Additional CTA section */
+    .extra-ctas {
+      max-width: 800px;
+      margin: var(--space-10) auto 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .extra-cta-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      background-color: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-base);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .extra-cta-card:hover {
+      border-color: var(--color-gold-200);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .extra-cta-card__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .extra-cta-card__icon--gold {
+      background: linear-gradient(135deg, var(--color-gold-100), var(--color-gold-50));
+      color: var(--color-gold-500);
+    }
+
+    .extra-cta-card__icon--navy {
+      background: linear-gradient(135deg, var(--color-navy-50), var(--color-navy-100));
+      color: var(--color-navy-500);
+    }
+
+    .extra-cta-card__icon--green {
+      background: linear-gradient(135deg, var(--color-success-light), #a7f3d0);
+      color: var(--color-success);
+    }
+
+    .extra-cta-card__icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .extra-cta-card__text strong {
+      display: block;
+      font-size: var(--font-size-base);
+      color: var(--color-navy-900);
+      margin-bottom: var(--space-1);
+    }
+
+    .extra-cta-card__text span {
+      font-size: var(--font-size-sm);
+      color: var(--color-gray-500);
+    }
+
+    .extra-cta-card__arrow {
+      width: 20px;
+      height: 20px;
+      color: var(--color-gray-300);
+      margin-left: auto;
+      flex-shrink: 0;
+      transition: transform var(--transition-fast);
+    }
+
+    .extra-cta-card:hover .extra-cta-card__arrow {
+      transform: translateX(3px);
+      color: var(--color-gold-400);
+    }
+
+    /* Trust reinforcement bar */
+    .trust-reinforcement {
+      max-width: 800px;
+      margin: var(--space-10) auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-6);
+      padding: var(--space-5);
+      background-color: var(--color-gray-50);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-gray-100);
+    }
+
+    .trust-reinforcement__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-sm);
+      color: var(--color-gray-600);
+      font-weight: var(--font-weight-medium);
+    }
+
+    .trust-reinforcement__item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--color-success);
+      flex-shrink: 0;
+    }
+
+    /* Lender logos strip */
+    .lender-strip {
+      max-width: 800px;
+      margin: var(--space-8) auto 0;
+      text-align: center;
+    }
+
+    .lender-strip__label {
+      font-size: var(--font-size-xs);
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-widest);
+      margin-bottom: var(--space-4);
+    }
+
+    .lender-strip__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .lender-strip__logo {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-gray-300);
+      letter-spacing: var(--letter-spacing-tight);
+    }
+
+    /* Social share */
+    .social-share {
+      max-width: 800px;
+      margin: var(--space-8) auto 0;
+      text-align: center;
+      padding: var(--space-6);
+      background-color: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-xl);
+    }
+
+    .social-share__title {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-navy-900);
+      margin-bottom: var(--space-4);
+    }
+
+    .social-share__buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+    }
+
+    .social-share__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      border: 1px solid var(--color-gray-200);
+      color: var(--color-gray-600);
+      background-color: var(--color-white);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .social-share__btn:hover {
+      border-color: var(--color-gray-300);
+      background-color: var(--color-gray-50);
+      color: var(--color-navy-900);
+    }
+
+    .social-share__btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .extra-ctas {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .extra-cta-card {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-6);
+      }
+      .extra-cta-card__arrow {
+        display: none;
+      }
+      .app-summary__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================================
+       NAVIGATION
+       ================================================================ -->
+  <nav class="nav" id="main-nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="../" class="nav__logo">
+          <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="36" rx="8" fill="url(#logo-grad)" />
+            <path d="M10 24V12l8 6-8 6z" fill="#0a1628" />
+            <path d="M18 24V12l8 6-8 6z" fill="#0a1628" opacity="0.5" />
+            <defs>
+              <linearGradient id="logo-grad" x1="0" y1="0" x2="36" y2="36">
+                <stop stop-color="#d4a853" />
+                <stop offset="1" stop-color="#c9952e" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="nav__logo-text">Elevate<span>Lend</span></span>
+        </a>
+
+        <div class="nav__links">
+          <a href="../#products" class="nav__link">Loan Products</a>
+          <a href="../#how-it-works" class="nav__link">How It Works</a>
+          <a href="../#calculator" class="nav__link">Calculator</a>
+          <a href="../#testimonials" class="nav__link">Reviews</a>
+          <a href="../#faq" class="nav__link">FAQ</a>
+        </div>
+
+        <div class="nav__actions">
+          <a href="tel:1300000000" class="btn btn--sm btn--ghost" style="color: rgba(255,255,255,0.7);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            1300 000 000
+          </a>
+          <a href="../#apply" class="btn btn--primary btn--sm nav__cta">Get Matched Free</a>
+          <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false" data-nav-toggle>
+            <svg class="nav__toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav__mobile-menu" data-nav-menu>
+    <a href="../#products" class="nav__mobile-link">Loan Products</a>
+    <a href="../#how-it-works" class="nav__mobile-link">How It Works</a>
+    <a href="../#calculator" class="nav__mobile-link">Calculator</a>
+    <a href="../#testimonials" class="nav__mobile-link">Reviews</a>
+    <a href="../#faq" class="nav__mobile-link">FAQ</a>
+    <a href="../#apply" class="btn btn--primary btn--block nav__mobile-cta">Get Matched Free</a>
+  </div>
+
+  <!-- ================================================================
+       CONFETTI CANVAS
+       ================================================================ -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ================================================================
+       MAIN CONTENT
+       ================================================================ -->
+  <main class="confirmation">
+    <div class="container">
+
+      <!-- SUCCESS HEADER -->
+      <div class="confirmation__header" id="confirmation-header">
+        <div class="confirmation__checkmark">
+          <div class="checkmark-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+        </div>
+        <h1 class="confirmation__title" id="confirmation-title">Great news!</h1>
+        <p class="confirmation__subtitle" id="confirmation-subtitle">You've been matched with top lenders</p>
+        <div class="confirmation__contact-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          A lending specialist will contact you within 2 hours
+        </div>
+      </div>
+
+      <!-- MATCHED LENDER CARDS -->
+      <div class="match-results" id="match-results">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <!-- WHAT HAPPENS NEXT -->
+      <div class="next-steps" id="next-steps">
+        <h2 class="next-steps__title">What Happens Next</h2>
+        <div class="next-steps__list">
+          <div class="next-step next-step--active">
+            <div class="next-step__number">1</div>
+            <div class="next-step__text">
+              <strong>Your application is being reviewed</strong>
+              Our AI matching engine is finalising your lender recommendations and preparing your profile for review.
+            </div>
+            <div class="next-step__spinner"></div>
+          </div>
+          <div class="next-step">
+            <div class="next-step__number">2</div>
+            <div class="next-step__text">
+              <strong>A specialist will call you within 2 hours</strong>
+              Your dedicated lending specialist will discuss your options and answer any questions you have.
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="next-step__number">3</div>
+            <div class="next-step__text">
+              <strong>Compare your offers and choose the best deal</strong>
+              You'll receive personalised offers from your matched lenders with no obligation to proceed.
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="next-step__number">4</div>
+            <div class="next-step__text">
+              <strong>Get funded &mdash; often within 24 hours</strong>
+              Once you accept an offer, funding can land in your account the same or next business day.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- APPLICATION SUMMARY -->
+      <div class="app-summary" id="app-summary">
+        <div class="app-summary__header">
+          <h3 class="app-summary__title">Application Summary</h3>
+          <span class="app-summary__ref" id="ref-number">EL-2026-00000</span>
+        </div>
+        <div class="app-summary__grid" id="summary-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- ADDITIONAL CTAs -->
+      <div class="extra-ctas">
+        <a href="../#calculator" class="extra-cta-card">
+          <div class="extra-cta-card__icon extra-cta-card__icon--gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+          </div>
+          <div class="extra-cta-card__text">
+            <strong>Rate Calculator</strong>
+            <span>Explore repayment estimates while you wait</span>
+          </div>
+          <svg class="extra-cta-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="tel:1300000000" class="extra-cta-card">
+          <div class="extra-cta-card__icon extra-cta-card__icon--navy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="extra-cta-card__text">
+            <strong>Have Questions?</strong>
+            <span>Call us at 1300 000 000</span>
+          </div>
+          <svg class="extra-cta-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <div class="extra-cta-card" onclick="shareReferral()" style="cursor:pointer;">
+          <div class="extra-cta-card__icon extra-cta-card__icon--green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </div>
+          <div class="extra-cta-card__text">
+            <strong>Refer a Friend</strong>
+            <span>Know a business owner who needs funding?</span>
+          </div>
+          <svg class="extra-cta-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+
+      <!-- SOCIAL SHARE -->
+      <div class="social-share">
+        <p class="social-share__title">Know a business owner who needs funding?</p>
+        <div class="social-share__buttons">
+          <a href="#" class="social-share__btn" id="share-linkedin" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+            LinkedIn
+          </a>
+          <a href="#" class="social-share__btn" id="share-facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <button class="social-share__btn" id="share-copy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Link
+          </button>
+        </div>
+      </div>
+
+      <!-- TRUST REINFORCEMENT -->
+      <div class="trust-reinforcement">
+        <div class="trust-reinforcement__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          256-bit encryption
+        </div>
+        <div class="trust-reinforcement__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          No credit hit &mdash; soft check only
+        </div>
+        <div class="trust-reinforcement__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Data protected &amp; never sold
+        </div>
+      </div>
+
+      <!-- LENDER LOGOS STRIP -->
+      <div class="lender-strip">
+        <p class="lender-strip__label">Our Lending Partners</p>
+        <div class="lender-strip__logos">
+          <span class="lender-strip__logo">Prospa</span>
+          <span class="lender-strip__logo">Trucap</span>
+          <span class="lender-strip__logo">Bizcap</span>
+          <span class="lender-strip__logo">Shift</span>
+          <span class="lender-strip__logo">Lumi</span>
+          <span class="lender-strip__logo">OnDeck</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="../" class="footer__logo">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="36" height="36" rx="8" fill="url(#logo-grad-f)" />
+              <path d="M10 24V12l8 6-8 6z" fill="#0a1628" />
+              <path d="M18 24V12l8 6-8 6z" fill="#0a1628" opacity="0.5" />
+              <defs>
+                <linearGradient id="logo-grad-f" x1="0" y1="0" x2="36" y2="36">
+                  <stop stop-color="#d4a853" />
+                  <stop offset="1" stop-color="#c9952e" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="footer__logo-text">Elevate<span>Lend</span></span>
+          </a>
+          <p class="footer__tagline">Australia's smart business loan comparison platform. We match you with the right lender in minutes, not days.</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="LinkedIn">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Facebook">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="X / Twitter">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer__nav-title">Products</h4>
+          <ul class="footer__nav-list">
+            <li><a href="#" class="footer__nav-link">Business Loans</a></li>
+            <li><a href="#" class="footer__nav-link">Line of Credit</a></li>
+            <li><a href="#" class="footer__nav-link">Equipment Finance</a></li>
+            <li><a href="#" class="footer__nav-link">Invoice Factoring</a></li>
+            <li><a href="#" class="footer__nav-link">Merchant Cash Advance</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer__nav-title">Company</h4>
+          <ul class="footer__nav-list">
+            <li><a href="#" class="footer__nav-link">About Us</a></li>
+            <li><a href="#" class="footer__nav-link">How It Works</a></li>
+            <li><a href="#" class="footer__nav-link">Our Lenders</a></li>
+            <li><a href="#" class="footer__nav-link">Blog</a></li>
+            <li><a href="#" class="footer__nav-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer__nav-title">Support</h4>
+          <ul class="footer__nav-list">
+            <li><a href="#" class="footer__nav-link">FAQ</a></li>
+            <li><a href="#" class="footer__nav-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer__nav-link">Terms of Service</a></li>
+            <li><a href="#" class="footer__nav-link">Credit Guide</a></li>
+            <li><a href="tel:1300000000" class="footer__nav-link">1300 000 000</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__bottom-inner">
+          <p class="footer__copyright">&copy; 2026 ElevateLend Pty Ltd. All rights reserved. ABN 00 000 000 000. Australian Credit Licence 000000.</p>
+          <div class="footer__legal">
+            <a href="#" class="footer__legal-link">Privacy Policy</a>
+            <a href="#" class="footer__legal-link">Terms &amp; Conditions</a>
+            <a href="#" class="footer__legal-link">Credit Guide</a>
+            <a href="#" class="footer__legal-link">Complaints</a>
+          </div>
+        </div>
+        <p class="footer__disclaimer">
+          ElevateLend is a loan comparison service, not a lender. All loan products are provided by third-party lenders. Interest rates, fees, and terms are determined by individual lenders and may vary. This is general information only and does not constitute financial advice. Please consider your own circumstances and read the relevant product disclosure statements before making a decision.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================================
+       SCRIPTS
+       ================================================================ -->
+  <script src="../js/main.js"></script>
+  <script>
+    /**
+     * ElevateLend — Confirmation Page Logic
+     * Smart lender matching based on URL query parameters.
+     */
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------------------------------
+         LENDER DATABASE
+         ---------------------------------------------------------------- */
+      const LENDERS = {
+        prospa: {
+          name: 'Prospa',
+          initials: 'PR',
+          colorClass: 'prospa',
+          matchPercent: 98,
+          features: [
+            'Fast approval',
+            'Same-day funding',
+            'Loans $5K–$500K',
+            'No asset security needed'
+          ],
+          whyMatch: 'Based on your business profile and funding needs, Prospa\'s fast-approval model and flexible unsecured lending make them an excellent fit for your situation.'
+        },
+        trucap: {
+          name: 'Trucap',
+          initials: 'TC',
+          colorClass: 'trucap',
+          matchPercent: 95,
+          features: [
+            'Flexible terms',
+            'Revenue-based lending',
+            '$10K–$2M',
+            'Defaults considered'
+          ],
+          whyMatch: 'Trucap\'s revenue-based approach means they assess your business on cash flow rather than just credit history, giving you access to competitive terms tailored to your turnover.'
+        },
+        bizcap: {
+          name: 'Bizcap',
+          initials: 'BC',
+          colorClass: 'bizcap',
+          matchPercent: 94,
+          features: [
+            'Bad credit specialists',
+            'Fast turnaround',
+            '$5K–$1M',
+            'Second chance lending'
+          ],
+          whyMatch: 'Bizcap specialises in working with businesses that have experienced credit challenges. They look beyond defaults and focus on your current business performance.'
+        },
+        shift: {
+          name: 'Shift',
+          initials: 'SH',
+          colorClass: 'shift',
+          matchPercent: 96,
+          features: [
+            'Competitive rates',
+            'Existing loan refinancing',
+            '$10K–$500K',
+            'Quick settlement'
+          ],
+          whyMatch: 'Since you already have an existing lending relationship, Shift can offer competitive refinancing options to potentially lower your costs and consolidate your business finance.'
+        }
+      };
+
+      /* ----------------------------------------------------------------
+         UTILITY: PARSE QUERY PARAMS
+         ---------------------------------------------------------------- */
+      function getParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+          name: params.get('name') || params.get('first_name') || '',
+          email: params.get('email') || '',
+          amount: params.get('amount') || '',
+          purpose: params.get('purpose') || '',
+          creditDefaults: (params.get('credit_defaults') || '').toLowerCase(),
+          existingLenders: (params.get('existing_lenders') || '').toLowerCase(),
+          businessName: params.get('business_name') || '',
+          timeInBusiness: params.get('time_in_business') || '',
+          revenue: params.get('revenue') || ''
+        };
+      }
+
+      /* ----------------------------------------------------------------
+         SMART MATCHING LOGIC
+         ---------------------------------------------------------------- */
+      function determineMatchedLenders(params) {
+        // Rule 3: existing_lenders includes "prospa"
+        if (params.existingLenders.includes('prospa')) {
+          return ['shift', 'trucap'];
+        }
+        // Rule 2: credit_defaults=yes
+        if (params.creditDefaults === 'yes') {
+          return ['trucap', 'bizcap'];
+        }
+        // Rule 1: Default
+        return ['prospa', 'trucap'];
+      }
+
+      /* ----------------------------------------------------------------
+         GENERATE REFERENCE NUMBER
+         ---------------------------------------------------------------- */
+      function generateRefNumber() {
+        const rand = Math.floor(10000 + Math.random() * 90000);
+        return 'EL-2026-' + rand;
+      }
+
+      /* ----------------------------------------------------------------
+         FORMAT CURRENCY
+         ---------------------------------------------------------------- */
+      function formatAmount(raw) {
+        if (!raw) return '—';
+        const num = parseInt(raw.replace(/[^0-9]/g, ''), 10);
+        if (isNaN(num)) return raw;
+        return '$' + num.toLocaleString('en-AU');
+      }
+
+      /* ----------------------------------------------------------------
+         FORMAT PURPOSE
+         ---------------------------------------------------------------- */
+      function formatPurpose(raw) {
+        if (!raw) return '—';
+        return raw.replace(/[_-]/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      }
+
+      /* ----------------------------------------------------------------
+         BUILD LENDER CARD HTML
+         ---------------------------------------------------------------- */
+      function buildLenderCard(lenderKey, rank) {
+        var lender = LENDERS[lenderKey];
+        if (!lender) return '';
+
+        var isTop = rank === 1;
+        var features = lender.features.map(function (f) {
+          return '<span class="match-card__feature">' +
+            '<svg class="match-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+            f +
+            '</span>';
+        }).join('');
+
+        return '' +
+          '<div class="match-card' + (isTop ? ' match-card--top' : '') + '" data-match-percent="' + lender.matchPercent + '">' +
+            '<div class="match-card__rank">#' + rank + '</div>' +
+            '<div class="match-card__header">' +
+              '<div class="match-card__logo-placeholder match-card__logo-placeholder--' + lender.colorClass + '">' +
+                lender.initials +
+              '</div>' +
+              '<div>' +
+                '<h3 class="match-card__lender-name">' + lender.name + '</h3>' +
+                '<div class="match-card__match-score">' + lender.matchPercent + '% match</div>' +
+                '<div class="match-card__match-bar"><div class="match-card__match-fill" style="width:0%"></div></div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="match-card__features">' + features + '</div>' +
+            '<div class="match-card__why">' +
+              '<strong>Why we matched you</strong>' +
+              lender.whyMatch +
+            '</div>' +
+          '</div>';
+      }
+
+      /* ----------------------------------------------------------------
+         POPULATE HEADER
+         ---------------------------------------------------------------- */
+      function populateHeader(params, matchedLenders) {
+        var titleEl = document.getElementById('confirmation-title');
+        var subtitleEl = document.getElementById('confirmation-subtitle');
+
+        var displayName = params.name ? params.name.split(' ')[0] : '';
+        if (displayName) {
+          // Capitalise first letter
+          displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+        }
+
+        titleEl.textContent = displayName ? 'Great news, ' + displayName + '!' : 'Great news!';
+
+        var lenderNames = matchedLenders.map(function (key) { return LENDERS[key].name; });
+        subtitleEl.textContent = 'You’ve been matched with ' + lenderNames.join(' and ');
+      }
+
+      /* ----------------------------------------------------------------
+         POPULATE LENDER CARDS
+         ---------------------------------------------------------------- */
+      function populateLenderCards(matchedLenders) {
+        var container = document.getElementById('match-results');
+        var html = '';
+        matchedLenders.forEach(function (key, index) {
+          html += buildLenderCard(key, index + 1);
+        });
+        container.innerHTML = html;
+
+        // Animate match bars after a short delay
+        setTimeout(function () {
+          var fills = container.querySelectorAll('.match-card__match-fill');
+          fills.forEach(function (fill) {
+            var card = fill.closest('.match-card');
+            var percent = card.dataset.matchPercent || '90';
+            fill.style.width = percent + '%';
+          });
+        }, 500);
+      }
+
+      /* ----------------------------------------------------------------
+         POPULATE APPLICATION SUMMARY
+         ---------------------------------------------------------------- */
+      function populateSummary(params) {
+        var refEl = document.getElementById('ref-number');
+        var gridEl = document.getElementById('summary-grid');
+        var refNumber = generateRefNumber();
+
+        refEl.textContent = refNumber;
+
+        var items = [];
+
+        if (params.amount) {
+          items.push({ label: 'Loan Amount', value: formatAmount(params.amount) });
+        }
+        if (params.purpose) {
+          items.push({ label: 'Purpose', value: formatPurpose(params.purpose) });
+        }
+        if (params.businessName) {
+          items.push({ label: 'Business', value: params.businessName });
+        }
+        if (params.timeInBusiness) {
+          items.push({ label: 'Time in Business', value: formatPurpose(params.timeInBusiness) });
+        }
+        if (params.revenue) {
+          items.push({ label: 'Annual Revenue', value: formatAmount(params.revenue) });
+        }
+        if (params.email) {
+          items.push({ label: 'Email', value: params.email });
+        }
+
+        // Always show reference
+        items.push({ label: 'Reference', value: refNumber });
+
+        // Always show date
+        items.push({ label: 'Submitted', value: new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }) });
+
+        var html = items.map(function (item) {
+          return '' +
+            '<div>' +
+              '<div class="app-summary__item-label">' + item.label + '</div>' +
+              '<div class="app-summary__item-value">' + item.value + '</div>' +
+            '</div>';
+        }).join('');
+
+        gridEl.innerHTML = html;
+      }
+
+      /* ----------------------------------------------------------------
+         SET SOCIAL SHARE LINKS
+         ---------------------------------------------------------------- */
+      function setupSocialLinks() {
+        var shareUrl = 'https://elevatelend.com.au';
+        var shareText = 'I just got matched with business lenders in minutes using ElevateLend. Check it out if you need business funding!';
+
+        var linkedinLink = document.getElementById('share-linkedin');
+        if (linkedinLink) {
+          linkedinLink.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(shareUrl);
+        }
+
+        var facebookLink = document.getElementById('share-facebook');
+        if (facebookLink) {
+          facebookLink.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl) + '&quote=' + encodeURIComponent(shareText);
+        }
+
+        var copyBtn = document.getElementById('share-copy');
+        if (copyBtn) {
+          copyBtn.addEventListener('click', function () {
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(shareUrl).then(function () {
+                copyBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(function () {
+                  copyBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Link';
+                }, 2500);
+              });
+            }
+          });
+        }
+      }
+
+      /* ----------------------------------------------------------------
+         CONFETTI ANIMATION
+         ---------------------------------------------------------------- */
+      function runConfetti() {
+        var canvas = document.getElementById('confetti-canvas');
+        if (!canvas) return;
+
+        var ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var particles = [];
+        var colors = ['#d4a853', '#c9952e', '#e0be7a', '#10b981', '#3b82f6', '#f59e0b', '#6366f1', '#ec4899'];
+        var PARTICLE_COUNT = 120;
+        var GRAVITY = 0.12;
+        var DRAG = 0.98;
+
+        for (var i = 0; i < PARTICLE_COUNT; i++) {
+          particles.push({
+            x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+            y: canvas.height * 0.3,
+            vx: (Math.random() - 0.5) * 16,
+            vy: (Math.random() - 1) * 14 - 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            size: Math.random() * 6 + 3,
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 10,
+            shape: Math.random() > 0.5 ? 'rect' : 'circle',
+            alpha: 1
+          });
+        }
+
+        var frameCount = 0;
+        var maxFrames = 180; // ~3 seconds at 60fps
+
+        function animate() {
+          frameCount++;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          var allDone = true;
+
+          particles.forEach(function (p) {
+            p.vy += GRAVITY;
+            p.vx *= DRAG;
+            p.vy *= DRAG;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rotation += p.rotationSpeed;
+
+            // Fade out near end
+            if (frameCount > maxFrames * 0.6) {
+              p.alpha -= 0.02;
+              if (p.alpha < 0) p.alpha = 0;
+            }
+
+            if (p.alpha > 0) {
+              allDone = false;
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate((p.rotation * Math.PI) / 180);
+              ctx.globalAlpha = p.alpha;
+              ctx.fillStyle = p.color;
+
+              if (p.shape === 'rect') {
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+              } else {
+                ctx.beginPath();
+                ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                ctx.fill();
+              }
+
+              ctx.restore();
+            }
+          });
+
+          if (!allDone && frameCount < maxFrames) {
+            requestAnimationFrame(animate);
+          } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'none';
+          }
+        }
+
+        requestAnimationFrame(animate);
+
+        // Handle resize
+        window.addEventListener('resize', function () {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+      }
+
+      /* ----------------------------------------------------------------
+         ANIMATE NEXT-STEP 1 (simulate processing)
+         ---------------------------------------------------------------- */
+      function animateFirstStep() {
+        var firstStep = document.querySelector('.next-step--active');
+        if (!firstStep) return;
+
+        setTimeout(function () {
+          var spinner = firstStep.querySelector('.next-step__spinner');
+          if (spinner) {
+            spinner.outerHTML = '<svg class="next-step__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+          }
+          firstStep.classList.remove('next-step--active');
+        }, 4000);
+      }
+
+      /* ----------------------------------------------------------------
+         SCROLL NAV STYLING
+         ---------------------------------------------------------------- */
+      function setupNavScroll() {
+        var nav = document.getElementById('main-nav');
+        if (!nav) return;
+
+        // Start with scrolled style since page is light background
+        nav.classList.add('nav--scrolled');
+
+        window.addEventListener('scroll', function () {
+          if (window.scrollY > 20) {
+            nav.classList.add('nav--scrolled');
+          }
+        }, { passive: true });
+      }
+
+      /* ----------------------------------------------------------------
+         SHARE REFERRAL (extra CTA card)
+         ---------------------------------------------------------------- */
+      window.shareReferral = function () {
+        var shareUrl = 'https://elevatelend.com.au';
+        var shareText = 'I just got matched with business lenders in minutes using ElevateLend. Check it out!';
+        if (navigator.share) {
+          navigator.share({ title: 'ElevateLend', text: shareText, url: shareUrl });
+        } else {
+          // Fallback: scroll to share section
+          var shareSection = document.querySelector('.social-share');
+          if (shareSection) {
+            shareSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      };
+
+      /* ----------------------------------------------------------------
+         INITIALISE EVERYTHING ON DOM READY
+         ---------------------------------------------------------------- */
+      document.addEventListener('DOMContentLoaded', function () {
+        var params = getParams();
+        var matchedLenders = determineMatchedLenders(params);
+
+        populateHeader(params, matchedLenders);
+        populateLenderCards(matchedLenders);
+        populateSummary(params);
+        setupSocialLinks();
+        setupNavScroll();
+        animateFirstStep();
+
+        // Slight delay before confetti so the page renders first
+        setTimeout(runConfetti, 300);
+      });
+
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compare 75+ Australian business lenders in one free application. No credit hit, no obligations. Get matched to the best rates in minutes. ElevateLend — business funding, sorted.">
+  <meta name="keywords" content="business loans Australia, business finance, equipment finance, line of credit, invoice finance, trade finance, loan comparison">
+  <meta name="author" content="ElevateLend">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ElevateLend — Business Funding, Sorted in Minutes">
+  <meta property="og:description" content="Compare 75+ Australian lenders in one free application. No credit hit, no obligations — just the best rates matched to your business.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elevatelend.com.au/">
+  <meta property="og:locale" content="en_AU">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ElevateLend — Business Funding, Sorted in Minutes">
+  <meta name="twitter:description" content="Compare 75+ Australian lenders in one free application. No credit hit, no obligations.">
+
+  <title>ElevateLend — Business Loans Compared | 75+ Australian Lenders</title>
+
+  <link rel="canonical" href="https://elevatelend.com.au/">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a1628'/><path d='M8 22l8-14 8 14' stroke='%23d4a853' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+</head>
+<body>
+
+  <!-- ====================================================================
+       1. PROMO TOP BAR
+       ==================================================================== -->
+  <div class="promo-bar" role="banner" id="promo-bar">
+    <div class="container" style="position: relative;">
+      <span style="font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">LIMITED TIME</span> &mdash; 6 weeks no repayments on approved business loans. <a href="#eofy-offer">View offer &rarr;</a>
+      <button class="promo-bar__close" aria-label="Close promotional banner" onclick="document.getElementById('promo-bar').style.display='none'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       2. NAVIGATION
+       ==================================================================== -->
+  <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav__inner">
+
+        <!-- Logo -->
+        <a href="/" class="nav__logo" aria-label="ElevateLend home">
+          <svg class="nav__logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="36" height="36" rx="10" fill="url(#logo-grad)"/>
+            <path d="M10 26l8-16 8 16" stroke="#d4a853" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13 20h10" stroke="#d4a853" stroke-width="2" stroke-linecap="round"/>
+            <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="36" y2="36"><stop stop-color="#0f1f38"/><stop offset="1" stop-color="#152848"/></linearGradient></defs>
+          </svg>
+          <span class="nav__logo-text">Elevate<span>Lend</span></span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="nav__links">
+          <div class="nav__link" style="position:relative; cursor:pointer;" id="products-dropdown-trigger">
+            Products
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-left:4px; display:inline-block; vertical-align:middle;"><polyline points="6 9 12 15 18 9"/></svg>
+            <!-- Dropdown -->
+            <div style="display:none; position:absolute; top:100%; left:0; min-width:220px; background:rgba(10,22,40,0.95); backdrop-filter:blur(16px); border-radius:var(--radius-lg); padding:var(--space-2) 0; box-shadow:var(--shadow-xl); border:1px solid rgba(255,255,255,0.08); z-index:var(--z-dropdown);" id="products-dropdown">
+              <a href="/products/business-loans/" style="display:block; padding:var(--space-3) var(--space-5); font-size:var(--font-size-sm); color:rgba(255,255,255,0.8); transition:all 150ms;">Business Loans</a>
+              <a href="/products/line-of-credit/" style="display:block; padding:var(--space-3) var(--space-5); font-size:var(--font-size-sm); color:rgba(255,255,255,0.8); transition:all 150ms;">Line of Credit</a>
+              <a href="/products/equipment-finance/" style="display:block; padding:var(--space-3) var(--space-5); font-size:var(--font-size-sm); color:rgba(255,255,255,0.8); transition:all 150ms;">Equipment Finance</a>
+              <a href="/products/invoice-finance/" style="display:block; padding:var(--space-3) var(--space-5); font-size:var(--font-size-sm); color:rgba(255,255,255,0.8); transition:all 150ms;">Invoice Finance</a>
+              <a href="/products/trade-finance/" style="display:block; padding:var(--space-3) var(--space-5); font-size:var(--font-size-sm); color:rgba(255,255,255,0.8); transition:all 150ms;">Trade Finance</a>
+            </div>
+          </div>
+          <a href="/how-it-works/" class="nav__link">How it Works</a>
+          <a href="/private-lending/" class="nav__link">Private Lending</a>
+          <a href="/lenders/" class="nav__link">Lenders</a>
+          <a href="/about/" class="nav__link">About</a>
+        </div>
+
+        <!-- Actions -->
+        <div class="nav__actions">
+          <a href="tel:1300000000" class="nav__link" style="display:none;" aria-label="Call us">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            1300 000 000
+          </a>
+          <a href="/apply/" class="btn btn--primary btn--sm nav__cta">Apply Now &rarr;</a>
+
+          <!-- Mobile toggle -->
+          <button class="nav__toggle" data-nav-toggle aria-label="Toggle navigation menu" aria-expanded="false">
+            <svg class="nav__toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="nav__mobile-menu" data-nav-menu>
+      <a href="/products/business-loans/" class="nav__mobile-link">Business Loans</a>
+      <a href="/products/line-of-credit/" class="nav__mobile-link">Line of Credit</a>
+      <a href="/products/equipment-finance/" class="nav__mobile-link">Equipment Finance</a>
+      <a href="/products/invoice-finance/" class="nav__mobile-link">Invoice Finance</a>
+      <a href="/products/trade-finance/" class="nav__mobile-link">Trade Finance</a>
+      <a href="/how-it-works/" class="nav__mobile-link">How it Works</a>
+      <a href="/private-lending/" class="nav__mobile-link">Private Lending</a>
+      <a href="/lenders/" class="nav__mobile-link">Lenders</a>
+      <a href="/about/" class="nav__mobile-link">About</a>
+      <div class="nav__mobile-cta">
+        <a href="/apply/" class="btn btn--primary btn--block">Apply Now &rarr;</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====================================================================
+       3. HERO SECTION
+       ==================================================================== -->
+  <section class="hero" id="hero">
+    <div class="hero__grid-pattern" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero__content">
+
+        <!-- Trust badge -->
+        <div class="hero__badge">
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          TRUSTED BY 1,200+ AUSTRALIAN BUSINESSES
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero__title">
+          Elevate your business funding.<br>
+          <span class="hero__title-highlight">Sorted in minutes.</span>
+        </h1>
+
+        <!-- Subtext -->
+        <p class="hero__subtitle">
+          Compare 75+ Australian lenders in one free application. No credit hit, no obligations &mdash; just the best rates matched to your business in minutes.
+        </p>
+
+        <!-- CTA buttons -->
+        <div class="hero__actions">
+          <a href="/apply/" class="btn btn--primary btn--lg btn--pulse">Get my free quote &rarr;</a>
+          <a href="/how-it-works/" class="btn btn--outline btn--lg">How it works</a>
+        </div>
+
+        <!-- Trust indicators -->
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-6); margin-bottom:var(--space-8);">
+          <div style="display:flex; align-items:center; gap:var(--space-2); color:var(--color-navy-200); font-size:var(--font-size-sm);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            No credit hit
+          </div>
+          <div style="display:flex; align-items:center; gap:var(--space-2); color:var(--color-navy-200); font-size:var(--font-size-sm);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            24-hour funding
+          </div>
+          <div style="display:flex; align-items:center; gap:var(--space-2); color:var(--color-navy-200); font-size:var(--font-size-sm);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            75+ lenders
+          </div>
+        </div>
+
+        <!-- Social proof / rating -->
+        <div class="hero__social-proof">
+          <div style="display:flex; align-items:center; gap:var(--space-4);">
+            <!-- Star rating -->
+            <div class="hero__stars" aria-label="4.9 out of 5 stars">
+              <svg class="hero__star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+              <svg class="hero__star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+              <svg class="hero__star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+              <svg class="hero__star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+              <svg class="hero__star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            </div>
+            <p class="hero__social-text"><strong>4.9/5</strong> from 680+ verified reviews</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       4. STATS BAR
+       ==================================================================== -->
+  <section class="section--dark" style="padding-block:var(--space-10);">
+    <div class="container">
+      <div class="stats stats--divided">
+        <div class="stat">
+          <div class="stat__value" data-counter="$2.4B+">$2.4B+</div>
+          <div class="stat__label">Total Funded</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value" data-counter="93%">93%</div>
+          <div class="stat__label">Approval Rate</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value" data-counter="75+">75+</div>
+          <div class="stat__label">Lender Partners</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value" data-counter="24hrs">24hrs</div>
+          <div class="stat__label">Average Decision</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       5. EOFY OFFER SECTION
+       ==================================================================== -->
+  <section class="section section--gray" id="eofy-offer">
+    <div class="container">
+      <div style="max-width:800px; margin-inline:auto; text-align:center;">
+
+        <span class="badge badge--gold" style="margin-bottom:var(--space-4); display:inline-flex;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-right:4px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          LIMITED TIME OFFER
+        </span>
+
+        <h2 class="section-header__title" style="margin-bottom:var(--space-4);">
+          6 weeks <span class="text-gradient">no repayments</span> on approved business loans
+        </h2>
+
+        <p class="section-header__subtitle" style="margin-bottom:var(--space-8); max-width:600px; margin-inline:auto;">
+          Get the cash your business needs now, with breathing room to put it to work before repayments start. Available on select lender products for a limited time.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:var(--space-6); margin-bottom:var(--space-8); text-align:left;">
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <div style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--color-gold-100), var(--color-gold-50)); border-radius:var(--radius-lg); flex-shrink:0;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-500)" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:600; color:var(--color-navy-900); margin-bottom:2px;">No upfront costs</div>
+              <div style="font-size:var(--font-size-sm); color:var(--color-gray-500);">Zero setup fees on qualifying products</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <div style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--color-gold-100), var(--color-gold-50)); border-radius:var(--radius-lg); flex-shrink:0;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-500)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:600; color:var(--color-navy-900); margin-bottom:2px;">No credit impact</div>
+              <div style="font-size:var(--font-size-sm); color:var(--color-gray-500);">Soft credit check only &mdash; your score stays safe</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:var(--space-3); align-items:flex-start;">
+            <div style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--color-gold-100), var(--color-gold-50)); border-radius:var(--radius-lg); flex-shrink:0;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-500)" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:600; color:var(--color-navy-900); margin-bottom:2px;">6 weeks deferral</div>
+              <div style="font-size:var(--font-size-sm); color:var(--color-gray-500);">Your first repayment is deferred for 42 days</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/apply/" class="btn btn--primary btn--lg">Claim this offer &rarr;</a>
+        <p class="scarcity-notice" style="margin-top:var(--space-4); text-align:center;">
+          <strong>Offer ends 30 June 2026.</strong> Available on select products, T&amp;Cs apply.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       6. PRODUCTS SECTION
+       ==================================================================== -->
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          Funding Solutions
+        </span>
+        <h2 class="section-header__title">The right funding for every business need</h2>
+        <p class="section-header__subtitle">From short-term cash flow to long-term growth capital &mdash; we match you with the best product and lender for your situation.</p>
+      </div>
+
+      <div class="product-cards">
+
+        <!-- Business Loans -->
+        <a href="/products/business-loans/" class="product-card product-card--featured" style="text-decoration:none;">
+          <span class="product-card__badge">Most Popular</span>
+          <div class="product-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          </div>
+          <h3 class="product-card__title">Business Loans</h3>
+          <p class="product-card__description">Flexible unsecured and secured business loans for working capital, growth, or any business purpose. Fast decisions, competitive rates.</p>
+          <div class="product-card__details">
+            <div>
+              <div class="product-card__detail-label">Amount</div>
+              <div class="product-card__detail-value">$5K - $5M</div>
+            </div>
+            <div>
+              <div class="product-card__detail-label">Rates from</div>
+              <div class="product-card__detail-value product-card__detail-value--highlight">6.9% p.a.</div>
+            </div>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__link">
+              Learn more
+              <svg class="product-card__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Line of Credit -->
+        <a href="/products/line-of-credit/" class="product-card" style="text-decoration:none;">
+          <div class="product-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg>
+          </div>
+          <h3 class="product-card__title">Line of Credit</h3>
+          <p class="product-card__description">Draw funds when you need them and only pay interest on what you use. The flexible revolving facility for managing cash flow.</p>
+          <div class="product-card__details">
+            <div>
+              <div class="product-card__detail-label">Amount</div>
+              <div class="product-card__detail-value">$10K - $500K</div>
+            </div>
+            <div>
+              <div class="product-card__detail-label">Rates from</div>
+              <div class="product-card__detail-value product-card__detail-value--highlight">0.5%/month</div>
+            </div>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__link">
+              Learn more
+              <svg class="product-card__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Equipment Finance -->
+        <a href="/products/equipment-finance/" class="product-card" style="text-decoration:none;">
+          <div class="product-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
+          </div>
+          <h3 class="product-card__title">Equipment Finance</h3>
+          <p class="product-card__description">Finance vehicles, machinery, technology and equipment with asset-backed lending. Preserve your cash flow and claim tax benefits.</p>
+          <div class="product-card__details">
+            <div>
+              <div class="product-card__detail-label">Amount</div>
+              <div class="product-card__detail-value">$5K - $2M</div>
+            </div>
+            <div>
+              <div class="product-card__detail-label">Rates from</div>
+              <div class="product-card__detail-value product-card__detail-value--highlight">4.9% p.a.</div>
+            </div>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__link">
+              Learn more
+              <svg class="product-card__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Invoice Finance -->
+        <a href="/products/invoice-finance/" class="product-card" style="text-decoration:none;">
+          <div class="product-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 class="product-card__title">Invoice Finance</h3>
+          <p class="product-card__description">Unlock the cash tied up in unpaid invoices. Get up to 95% of your invoice value advanced within 24 hours.</p>
+          <div class="product-card__details">
+            <div>
+              <div class="product-card__detail-label">Advance</div>
+              <div class="product-card__detail-value">Up to 95%</div>
+            </div>
+            <div>
+              <div class="product-card__detail-label">Funding</div>
+              <div class="product-card__detail-value product-card__detail-value--highlight">Within 24hrs</div>
+            </div>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__link">
+              Learn more
+              <svg class="product-card__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Trade Finance -->
+        <a href="/products/trade-finance/" class="product-card" style="text-decoration:none;">
+          <div class="product-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h3 class="product-card__title">Trade Finance</h3>
+          <p class="product-card__description">Fund international and domestic trade transactions. Import and export financing with flexible terms for growing businesses.</p>
+          <div class="product-card__details">
+            <div>
+              <div class="product-card__detail-label">Amount</div>
+              <div class="product-card__detail-value">$50K - $5M</div>
+            </div>
+            <div>
+              <div class="product-card__detail-label">Terms</div>
+              <div class="product-card__detail-value product-card__detail-value--highlight">Flexible</div>
+            </div>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__link">
+              Learn more
+              <svg class="product-card__link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       7. HOW IT WORKS
+       ==================================================================== -->
+  <section class="section section--dark" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Simple Process
+        </span>
+        <h2 class="section-header__title">How it works</h2>
+        <p class="section-header__subtitle">From application to funding in three simple steps. No paperwork headaches, no long waits.</p>
+      </div>
+
+      <div class="how-it-works" style="max-width:900px; margin-inline:auto;">
+
+        <!-- Step 1 -->
+        <div class="how-it-works__step animate-on-scroll">
+          <div class="how-it-works__icon-wrap">
+            <svg class="how-it-works__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <h3 class="how-it-works__title">Apply in 2 minutes</h3>
+          <p class="how-it-works__desc">Tell us about your business and funding needs. One simple form, no documents required upfront.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="how-it-works__step animate-on-scroll animate-on-scroll--delay-2">
+          <div class="how-it-works__icon-wrap">
+            <svg class="how-it-works__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3 class="how-it-works__title">Get matched</h3>
+          <p class="how-it-works__desc">Our technology compares 75+ lenders instantly and matches you with the best options for your profile.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="how-it-works__step animate-on-scroll animate-on-scroll--delay-4">
+          <div class="how-it-works__icon-wrap">
+            <svg class="how-it-works__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="how-it-works__title">Get funded in 24hrs</h3>
+          <p class="how-it-works__desc">Choose your preferred offer and receive funds as fast as the same business day. It really is that simple.</p>
+        </div>
+
+      </div>
+
+      <div style="text-align:center; margin-top:var(--space-12);">
+        <a href="/apply/" class="btn btn--primary btn--lg">Start your free application &rarr;</a>
+        <p style="font-size:var(--font-size-sm); color:var(--color-navy-300); margin-top:var(--space-3);">No credit hit &bull; No obligations &bull; 100% free</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       8. SOCIAL PROOF — TESTIMONIALS & LENDER LOGOS
+       ==================================================================== -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          Trusted by Business Owners
+        </span>
+        <h2 class="section-header__title">What our clients say</h2>
+        <p class="section-header__subtitle">Join 1,200+ Australian businesses who found better funding through ElevateLend.</p>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-card__stars">
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          </div>
+          <p class="testimonial-card__quote">"I needed $150K to expand my workshop and ElevateLend had me matched with three lenders within an hour. Funds were in my account the next day. Absolutely brilliant service."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar testimonial-card__avatar--placeholder" aria-hidden="true">MR</div>
+            <div>
+              <div class="testimonial-card__name">Mark Richardson</div>
+              <div class="testimonial-card__role">Owner, Richardson Auto &mdash; Melbourne, VIC</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card animate-on-scroll animate-on-scroll--delay-2">
+          <div class="testimonial-card__stars">
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          </div>
+          <p class="testimonial-card__quote">"As a cafe owner, cash flow is everything. The line of credit ElevateLend matched me with has been a game-changer. I only pay for what I draw down and the rate was far better than my bank offered."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar testimonial-card__avatar--placeholder" aria-hidden="true">SN</div>
+            <div>
+              <div class="testimonial-card__name">Sarah Nguyen</div>
+              <div class="testimonial-card__role">Founder, Bloom Espresso &mdash; Sydney, NSW</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card animate-on-scroll animate-on-scroll--delay-4">
+          <div class="testimonial-card__stars">
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+            <svg class="testimonial-card__star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          </div>
+          <p class="testimonial-card__quote">"We financed a new fleet of trucks through ElevateLend at 4.9% &mdash; our broker couldn't get close to that. The process was seamless and our dedicated manager kept us informed the whole way."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar testimonial-card__avatar--placeholder" aria-hidden="true">DP</div>
+            <div>
+              <div class="testimonial-card__name">Daniel Petropoulos</div>
+              <div class="testimonial-card__role">Director, Swift Logistics &mdash; Brisbane, QLD</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Lender logo grid -->
+      <div class="lender-logos" style="margin-top:var(--space-12);">
+        <p class="lender-logos__title">Partnered with Australia's leading lenders</p>
+        <div class="lender-logos__grid" style="grid-template-columns:repeat(4, 1fr);">
+
+          <div class="lender-logo" style="filter:none; opacity:0.65;">
+            <span style="font-size:var(--font-size-lg); font-weight:700; color:var(--color-navy-600); letter-spacing:-0.02em;">Prospa</span>
+          </div>
+          <div class="lender-logo" style="filter:none; opacity:0.65;">
+            <span style="font-size:var(--font-size-lg); font-weight:700; color:var(--color-navy-600); letter-spacing:-0.02em;">Bizcap</span>
+          </div>
+          <div class="lender-logo" style="filter:none; opacity:0.65;">
+            <span style="font-size:var(--font-size-lg); font-weight:700; color:var(--color-navy-600); letter-spacing:-0.02em;">OnDeck</span>
+          </div>
+          <div class="lender-logo" style="filter:none; opacity:0.65;">
+            <span style="font-size:var(--font-size-lg); font-weight:700; color:var(--color-navy-600); letter-spacing:-0.02em;">Moula</span>
+          </div>
+          <div class="lender-logo" style="filter:none; opacity:0.65;">
+            <span style="font-size:var(--font-size-lg); font-weight:700; color:var(--color-navy-600); letter-spacing:-0.02em;">Judo Bank</span>
+          </div>
+          <div class="lender-logo" style="filter:none; opacity:0.65;">
+            <span style="font-size:var(--font-size-lg); font-weight:700; color:var(--color-navy-600); letter-spacing:-0.02em;">Scotpac</span>
+          </div>
+          <div class="lender-logo" style="filter:none; opacity:0.65;">
+            <span style="font-size:var(--font-size-lg); font-weight:700; color:var(--color-navy-600); letter-spacing:-0.02em;">Shift</span>
+          </div>
+          <div class="lender-logo" style="filter:none; opacity:0.65;">
+            <span style="font-size:var(--font-size-lg); font-weight:700; color:var(--color-navy-600); letter-spacing:-0.02em;">Trucap</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       9. PRIVATE LENDING TEASER
+       ==================================================================== -->
+  <section class="section section--dark" id="private-lending">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr; gap:var(--space-10); align-items:center; max-width:900px; margin-inline:auto;">
+        <div style="text-align:center;">
+          <span class="section-header__badge" style="margin-bottom:var(--space-4);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Private &amp; Commercial
+          </span>
+          <h2 style="color:var(--color-white); font-size:var(--font-size-3xl); margin-bottom:var(--space-4);">
+            Need <span class="text-gradient">$500K to $40M+</span>?
+          </h2>
+          <p style="color:var(--color-navy-200); font-size:var(--font-size-lg); margin-bottom:var(--space-6); max-width:560px; margin-inline:auto; line-height:var(--line-height-relaxed);">
+            Our private lending division arranges bespoke facilities for larger, more complex funding requirements. Property-backed, mezzanine debt, development finance and more.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-4); margin-bottom:var(--space-8);">
+            <div style="display:flex; align-items:center; gap:var(--space-2); font-size:var(--font-size-sm); color:var(--color-navy-200);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Property-backed facilities
+            </div>
+            <div style="display:flex; align-items:center; gap:var(--space-2); font-size:var(--font-size-sm); color:var(--color-navy-200);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Development finance
+            </div>
+            <div style="display:flex; align-items:center; gap:var(--space-2); font-size:var(--font-size-sm); color:var(--color-navy-200);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mezzanine &amp; structured debt
+            </div>
+            <div style="display:flex; align-items:center; gap:var(--space-2); font-size:var(--font-size-sm); color:var(--color-navy-200);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Tailored terms
+            </div>
+          </div>
+          <a href="/private-lending/" class="btn btn--primary btn--lg">Explore private lending &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       10. FAQ SECTION
+       ==================================================================== -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          FAQ
+        </span>
+        <h2 class="section-header__title">Frequently asked questions</h2>
+        <p class="section-header__subtitle">Everything you need to know about getting business funding through ElevateLend.</p>
+      </div>
+
+      <div class="faq-list" data-accordion>
+
+        <div class="faq-item" data-accordion-item>
+          <button class="faq-item__trigger" data-accordion-trigger>
+            Does applying affect my credit score?
+            <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__content" data-accordion-content>
+            <p class="faq-item__answer">No. We perform a soft credit check only, which does not appear on your credit file and has zero impact on your credit score. A hard check only occurs if you choose to proceed with a specific lender&rsquo;s offer, and we will always let you know before that happens.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-accordion-item>
+          <button class="faq-item__trigger" data-accordion-trigger>
+            How long does the application take?
+            <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__content" data-accordion-content>
+            <p class="faq-item__answer">The initial application takes about 2 minutes. You&rsquo;ll receive matched lender options within hours &mdash; often within minutes. Once you select an offer, funding can be deposited as fast as the same business day, depending on the lender and product.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-accordion-item>
+          <button class="faq-item__trigger" data-accordion-trigger>
+            Is ElevateLend a lender?
+            <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__content" data-accordion-content>
+            <p class="faq-item__answer">No. ElevateLend is a comparison and broking platform. We partner with over 75 Australian lenders to find the best match for your business. Our service is completely free to you &mdash; lenders pay us a referral fee when you successfully take out a facility through our platform.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-accordion-item>
+          <button class="faq-item__trigger" data-accordion-trigger>
+            What documents do I need to apply?
+            <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__content" data-accordion-content>
+            <p class="faq-item__answer">For the initial application, you don&rsquo;t need any documents &mdash; just basic details about your business and funding needs. If a lender requires additional information (such as bank statements or financial reports), we&rsquo;ll guide you through that process step by step.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-accordion-item>
+          <button class="faq-item__trigger" data-accordion-trigger>
+            What types of businesses can apply?
+            <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__content" data-accordion-content>
+            <p class="faq-item__answer">We work with sole traders, partnerships, companies and trusts across virtually every industry. Whether you&rsquo;re a tradesperson, retailer, professional services firm, manufacturer, or tech startup &mdash; if you&rsquo;re an Australian business trading for at least 6 months, you&rsquo;re likely eligible. Apply in 2 minutes to find out.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-accordion-item>
+          <button class="faq-item__trigger" data-accordion-trigger>
+            How much can I borrow?
+            <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-item__content" data-accordion-content>
+            <p class="faq-item__answer">Our lender panel offers business loans from $5,000 up to $5 million for unsecured and secured products. For larger or more complex requirements above $500K, our private lending division can arrange bespoke facilities up to $40 million and beyond.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       11. FINAL CTA SECTION
+       ==================================================================== -->
+  <section class="section" id="final-cta" style="padding-bottom:var(--space-16);">
+    <div class="container">
+      <div class="cta">
+        <div class="cta__content">
+          <h2 class="cta__title">Ready to elevate your business funding?</h2>
+          <p class="cta__subtitle">Join 1,200+ Australian businesses who found better rates, faster funding, and a smoother experience with ElevateLend.</p>
+          <div class="cta__actions">
+            <a href="/apply/" class="btn btn--primary btn--lg btn--pulse">Get my free quote &rarr;</a>
+            <a href="tel:1300000000" class="btn btn--outline btn--lg">Call 1300 000 000</a>
+          </div>
+          <p class="scarcity-notice" style="margin-top:var(--space-4);">
+            <strong>Today&rsquo;s rates are live.</strong> Compare lenders now before rates change.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       12. FOOTER
+       ==================================================================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Brand column -->
+        <div class="footer__brand">
+          <a href="/" class="footer__logo" aria-label="ElevateLend home">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="36" height="36" rx="10" fill="url(#logo-grad-footer)"/>
+              <path d="M10 26l8-16 8 16" stroke="#d4a853" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13 20h10" stroke="#d4a853" stroke-width="2" stroke-linecap="round"/>
+              <defs><linearGradient id="logo-grad-footer" x1="0" y1="0" x2="36" y2="36"><stop stop-color="#152848"/><stop offset="1" stop-color="#1b3358"/></linearGradient></defs>
+            </svg>
+            <span class="footer__logo-text">Elevate<span>Lend</span></span>
+          </a>
+          <p class="footer__tagline">Australia&rsquo;s smarter way to compare business loans. One application, 75+ lenders, zero credit impact. Business funding, sorted.</p>
+          <div class="footer__social">
+            <!-- LinkedIn -->
+            <a href="#" class="footer__social-link" aria-label="Follow us on LinkedIn">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="#" class="footer__social-link" aria-label="Follow us on Facebook">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" class="footer__social-link" aria-label="Follow us on Instagram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Products column -->
+        <div>
+          <h4 class="footer__nav-title">Products</h4>
+          <ul class="footer__nav-list">
+            <li><a href="/products/business-loans/" class="footer__nav-link">Business Loans</a></li>
+            <li><a href="/products/line-of-credit/" class="footer__nav-link">Line of Credit</a></li>
+            <li><a href="/products/equipment-finance/" class="footer__nav-link">Equipment Finance</a></li>
+            <li><a href="/products/invoice-finance/" class="footer__nav-link">Invoice Finance</a></li>
+            <li><a href="/products/trade-finance/" class="footer__nav-link">Trade Finance</a></li>
+            <li><a href="/private-lending/" class="footer__nav-link">Private Lending</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources column -->
+        <div>
+          <h4 class="footer__nav-title">Resources</h4>
+          <ul class="footer__nav-list">
+            <li><a href="/how-it-works/" class="footer__nav-link">How it Works</a></li>
+            <li><a href="/lenders/" class="footer__nav-link">Our Lenders</a></li>
+            <li><a href="/about/" class="footer__nav-link">About Us</a></li>
+            <li><a href="/blog/" class="footer__nav-link">Blog</a></li>
+            <li><a href="/contact/" class="footer__nav-link">Contact</a></li>
+            <li><a href="/faq/" class="footer__nav-link">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal column -->
+        <div>
+          <h4 class="footer__nav-title">Legal</h4>
+          <ul class="footer__nav-list">
+            <li><a href="/privacy/" class="footer__nav-link">Privacy Policy</a></li>
+            <li><a href="/terms/" class="footer__nav-link">Terms &amp; Conditions</a></li>
+            <li><a href="/credit-guide/" class="footer__nav-link">Credit Guide</a></li>
+            <li><a href="/complaints/" class="footer__nav-link">Complaints</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="footer__bottom">
+        <div class="footer__bottom-inner">
+          <p class="footer__copyright">&copy; 2026 ElevateLend Pty Ltd. All rights reserved.</p>
+          <div class="footer__legal">
+            <a href="/privacy/" class="footer__legal-link">Privacy</a>
+            <a href="/terms/" class="footer__legal-link">Terms</a>
+            <a href="/credit-guide/" class="footer__legal-link">Credit Guide</a>
+          </div>
+        </div>
+        <p class="footer__disclaimer">
+          ElevateLend Pty Ltd ABN 00 000 000 000 holds Australian Credit Licence No. 000000. ElevateLend is a credit intermediary and comparison service, not a lender. All loan products are provided by third-party lenders. Rates, fees and terms are subject to change and vary by lender and applicant. Information on this website is general in nature and does not constitute financial advice. You should consider whether the products featured are appropriate for your circumstances. Full terms and conditions are available on request.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       FAB — Floating Action Button
+       ==================================================================== -->
+  <div class="fab">
+    <button class="fab__secondary" data-back-to-top aria-label="Back to top">
+      <svg class="fab__secondary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+  </div>
+
+  <!-- ====================================================================
+       INLINE SCRIPTS — Dropdown & Nav scroll state
+       ==================================================================== -->
+  <script>
+    // Products dropdown hover
+    (function() {
+      var trigger = document.getElementById('products-dropdown-trigger');
+      var dropdown = document.getElementById('products-dropdown');
+      if (!trigger || !dropdown) return;
+      trigger.addEventListener('mouseenter', function() { dropdown.style.display = 'block'; });
+      trigger.addEventListener('mouseleave', function() { dropdown.style.display = 'none'; });
+    })();
+
+    // Nav scroll state (adds nav--scrolled class)
+    (function() {
+      var nav = document.getElementById('main-nav');
+      if (!nav) return;
+      var threshold = 60;
+      var ticking = false;
+      function update() {
+        ticking = false;
+        if (window.scrollY > threshold) {
+          nav.classList.add('nav--scrolled');
+        } else {
+          nav.classList.remove('nav--scrolled');
+        }
+      }
+      window.addEventListener('scroll', function() {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+    })();
+
+    // FAQ accordion (inline fallback using CSS-based open class)
+    (function() {
+      document.querySelectorAll('.faq-item__trigger').forEach(function(trigger) {
+        trigger.addEventListener('click', function() {
+          var item = trigger.closest('.faq-item');
+          var wasOpen = item.classList.contains('is-open');
+
+          // Close all siblings
+          item.closest('.faq-list').querySelectorAll('.faq-item').forEach(function(sibling) {
+            sibling.classList.remove('is-open');
+          });
+
+          // Toggle current
+          if (!wasOpen) {
+            item.classList.add('is-open');
+          }
+        });
+      });
+    })();
+
+    // Mobile nav toggle
+    (function() {
+      var toggle = document.querySelector('.nav__toggle');
+      var menu = document.querySelector('.nav__mobile-menu');
+      if (!toggle || !menu) return;
+      toggle.addEventListener('click', function() {
+        var isOpen = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      // Close on link click
+      menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          menu.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    // Scroll animation observer
+    (function() {
+      var elements = document.querySelectorAll('.animate-on-scroll');
+      if (!elements.length || !('IntersectionObserver' in window)) {
+        elements.forEach(function(el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      elements.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // Back to top button visibility
+    (function() {
+      var btn = document.querySelector('.fab__secondary[data-back-to-top]');
+      if (!btn) return;
+      var threshold = 600;
+      var ticking = false;
+      function update() {
+        ticking = false;
+        btn.classList.toggle('is-visible', window.scrollY > threshold);
+      }
+      window.addEventListener('scroll', function() {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      update();
+    })();
+  </script>
+
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

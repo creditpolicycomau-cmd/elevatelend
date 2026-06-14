@@ -1,4 +1,5 @@
-/**
+document.addEventListener('DOMContentLoaded', function() { setTimeout(function() {
+  /**
  * ABN Lookup Integration for ElevateLend Apply Form
  * Self-contained: injects CSS, HTML, and event handlers
  * Uses the ABR JSONP API for business name and ABN search
@@ -416,3 +417,5 @@
 
   console.log('[ElevateLend] ABN Lookup module loaded');
 })();
+
+}, 100); });

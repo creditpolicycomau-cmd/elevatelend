@@ -1,222 +1,430 @@
-(function() {
+/**
+ * ABN Lookup Integration for ElevateLend Apply Form
+ * Self-contained: injects CSS, HTML, and event handlers
+ * Uses the ABR JSONP API for business name and ABN search
+ */
+(function () {
   'use strict';
-  var GUID = '40b65ac5-b8ad-4a1f-8ea1-5bc6d0783672';
-  var attached = false;
 
-  // Inject CSS
-  var style = document.createElement('style');
-  style.textContent = [
-    '.abn-dropdown{position:absolute;z-index:9999;background:#fff;border:2px solid #d4a853;border-radius:12px;max-height:280px;overflow-y:auto;display:none;box-shadow:0 8px 24px rgba(0,0,0,.12);margin-top:4px;left:0;right:0}',
-    '.abn-dropdown.show{display:block}',
-    '.abn-item{padding:12px 16px;cursor:pointer;border-bottom:1px solid #f3f4f6;transition:background .15s}',
-    '.abn-item:last-child{border-bottom:none}',
-    '.abn-item:hover{background:#faf5e8}',
-    '.abn-item-name{font-weight:600;color:#0a1628;font-size:15px}',
-    '.abn-item-meta{font-size:13px;color:#6b7280;margin-top:3px}',
-    '.abn-item-abn{font-family:ui-monospace,monospace;color:#b8822a;font-weight:500}',
-    '.abn-status{display:inline-block;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:600}',
-    '.abn-status-active{background:#d1fae5;color:#065f46}',
-    '.abn-status-cancelled{background:#fee2e2;color:#991b1b}',
-    '.abn-spinner{display:none;position:absolute;right:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;border:2.5px solid #e5e7eb;border-top-color:#d4a853;border-radius:50%;animation:abnSpin .6s linear infinite}',
-    '.abn-spinner.show{display:block}',
+  var GUID = '40b65ac5-b8ad-4a1f-8ea1-5bc6d0783672';
+  var ABN_DETAILS_URL = 'https://abr.business.gov.au/json/AbnDetails.aspx';
+  var NAME_SEARCH_URL = 'https://abr.business.gov.au/json/MatchingNames.aspx';
+  var DEBOUNCE_MS = 300;
+
+  /* -- CSS injection ---------------------------------------- */
+  var css = [
+    '.abn-lookup-wrapper{position:relative}',
+    '.abn-lookup-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:#9ca3af}',
+    '#abn_lookup{padding-left:42px}',
+    '.abn-lookup-spinner{display:none;position:absolute;right:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;border:2.5px solid #e5e7eb;border-top-color:#d4a853;border-radius:50%;animation:abnSpin .6s linear infinite}',
+    '.abn-lookup-spinner.is-visible{display:block}',
     '@keyframes abnSpin{to{transform:translateY(-50%) rotate(360deg)}}',
-    '.abn-confirmed{display:none;padding:12px 16px;background:linear-gradient(135deg,rgba(212,168,83,.08),rgba(201,149,46,.05));border:1.5px solid #e0be7a;border-radius:10px;margin-top:10px;align-items:center;gap:12px}',
-    '.abn-confirmed.show{display:flex}',
-    '.abn-confirmed-icon{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:#d1fae5;display:flex;align-items:center;justify-content:center}',
-    '.abn-confirmed-info{flex:1;min-width:0}',
-    '.abn-confirmed-name{font-weight:600;color:#0a1628;font-size:15px}',
-    '.abn-confirmed-meta{font-size:13px;color:#6b7280;margin-top:2px}',
-    '.abn-confirmed-clear{background:none;border:none;color:#9ca3af;cursor:pointer;font-size:20px;padding:4px 8px;border-radius:6px;line-height:1}',
-    '.abn-confirmed-clear:hover{color:#ef4444;background:rgba(239,68,68,.08)}'
+    '.abn-lookup-results{position:absolute;top:100%;left:0;right:0;background:#fff;border:2px solid #d4a853;border-radius:12px;margin-top:4px;max-height:300px;overflow-y:auto;z-index:1000;display:none;box-shadow:0 8px 24px rgba(0,0,0,.12)}',
+    '.abn-lookup-results.is-visible{display:block}',
+    '.abn-lookup-result{padding:12px 16px;cursor:pointer;border-bottom:1px solid #f3f4f6;transition:background .15s}',
+    '.abn-lookup-result:last-child{border-bottom:none}',
+    '.abn-lookup-result:hover,.abn-lookup-result:focus{background:#faf5e8}',
+    '.abn-lookup-result--empty{cursor:default;color:#9ca3af;text-align:center;padding:16px}',
+    '.abn-lookup-result__name{font-weight:600;color:#0a1628;font-size:15px}',
+    '.abn-lookup-result__details{font-size:13px;color:#6b7280;margin-top:3px}',
+    '.abn-lookup-result__abn{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#b8822a;font-weight:500}',
+    '.abn-lookup-result__status{display:inline-block;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:600}',
+    '.abn-lookup-result__status--active{background:#d1fae5;color:#065f46}',
+    '.abn-lookup-result__status--cancelled{background:#fee2e2;color:#991b1b}',
+    '.abn-confirmed{display:none;padding:12px 16px;background:linear-gradient(135deg,rgba(212,168,83,.08),rgba(201,149,46,.05));border:1.5px solid #e0be7a;border-radius:10px;margin-top:10px}',
+    '.abn-confirmed.is-visible{display:flex;align-items:center;gap:12px}',
+    '.abn-confirmed__icon{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:#d1fae5;display:flex;align-items:center;justify-content:center}',
+    '.abn-confirmed__icon svg{width:18px;height:18px;color:#065f46}',
+    '.abn-confirmed__info{flex:1;min-width:0}',
+    '.abn-confirmed__name{font-weight:600;color:#0a1628;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+    '.abn-confirmed__meta{font-size:13px;color:#6b7280;margin-top:2px}',
+    '.abn-confirmed__clear{background:none;border:none;color:#9ca3af;cursor:pointer;font-size:20px;padding:4px 8px;border-radius:6px;transition:all .15s;line-height:1}',
+    '.abn-confirmed__clear:hover{color:#ef4444;background:rgba(239,68,68,.08)}'
   ].join('\n');
+
+  var style = document.createElement('style');
+  style.textContent = css;
   document.head.appendChild(style);
 
-  function formatAbn(a) {
-    var d = String(a).replace(/\D/g, '').slice(0, 11);
-    if (d.length <= 2) return d;
-    if (d.length <= 5) return d.slice(0,2)+' '+d.slice(2);
-    if (d.length <= 8) return d.slice(0,2)+' '+d.slice(2,5)+' '+d.slice(5);
-    return d.slice(0,2)+' '+d.slice(2,5)+' '+d.slice(5,8)+' '+d.slice(8);
+  /* -- HTML injection-------------------------------------- */
+  var step2 = document.getElementById('step-2');
+  if (!step2) return;
+
+  var businessNameGroup = null;
+  var groups = step2.querySelectorAll('.form-group');
+  for (var i = 0; i < groups.length; i++) {
+    if (groups[i].querySelector('#business_name')) {
+      businessNameGroup = groups[i];
+      break;
+    }
   }
+  if (!businessNameGroup) return;
 
-  function esc(s) { var e = document.createElement('span'); e.textContent = s; return e.innerHTML; }
+  /* Build lookup HTML */
+  var lookupGroup = document.createElement('div');
+  lookupGroup.className = 'form-group';
+  lookupGroup.id = 'abn-lookup-group';
+  lookupGroup.innerHTML = [
+    '<label class="form-label" for="abn_lookup">',
+    '  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:4px;color:#d4a853"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+    '  ABN / Business Name Lookup',
+    '</label>',
+    '<div class="abn-lookup-wrapper">',
+    '  <div class="abn-lookup-icon">',
+    '    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+    '  </div>',
+    '  <input type="text" id="abn_lookup" class="form-input" placeholder="Search by business name or ABN..." autocomplete="off">',
+    '  <div class="abn-lookup-spinner" id="abn-spinner"></div>',
+    '  <div class="abn-lookup-results" id="abn-results"></div>',
+    '</div>',
+    '<span class="form-hint">Search the Australian Business Register \u2014 we\'ll auto-fill your details</span>',
+    '<div class="abn-confirmed" id="abn-confirmed">',
+    '  <div class="abn-confirmed__icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>',
+    '  <div class="abn-confirmed__info">',
+    '    <div class="abn-confirmed__name" id="abn-confirmed-name"></div>',
+    '    <div class="abn-confirmed__meta" id="abn-confirmed-meta"></div>',
+    '  </div>',
+    '  <button type="button" class="abn-confirmed__clear" id="abn-confirmed-clear" title="Clear and search again">&times;</button>',
+    '</div>'
+  ].join('\n');
 
-  function setVal(el, v) {
-    var setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
-    setter.call(el, v);
-    el.dispatchEvent(new Event('input', {bubbles:true}));
-    el.dispatchEvent(new Event('change', {bubbles:true}));
-  }
+  /* Insert before business_name group */
+  businessNameGroup.parentNode.insertBefore(lookupGroup, businessNameGroup);
 
+  /* -- Element references---------------------------------- */
+  var lookupInput = document.getElementById('abn_lookup');
+  var resultsDiv  = document.getElementById('abn-results');
+  var spinner     = document.getElementById('abn-spinner');
+  var confirmed   = document.getElementById('abn-confirmed');
+  var confName    = document.getElementById('abn-confirmed-name');
+  var confMeta    = document.getElementById('abn-confirmed-meta');
+  var confClear   = document.getElementById('abn-confirmed-clear');
+  var bizName     = document.getElementById('business_name');
+  var abnField    = document.getElementById('abn');
+
+  var debounceTimer = null;
+
+  /* -- JSONP helper---------------------------------------- */
   function jsonp(url) {
-    return new Promise(function(resolve, reject) {
-      var cb = '_abnCb_' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
-      var s = document.createElement('script');
-      var t = setTimeout(function() { cleanup(); reject(new Error('timeout')); }, 8000);
-      function cleanup() { clearTimeout(t); delete window[cb]; if (s.parentNode) s.parentNode.removeChild(s); }
-      window[cb] = function(d) { cleanup(); resolve(d); };
-      s.src = url + '&callback=' + cb;
-      s.onerror = function() { cleanup(); reject(new Error('error')); };
-      document.head.appendChild(s);
-    });
-  }
+    return new Promise(function (resolve, reject) {
+      var cbName = '_abnCb_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+      var script = document.createElement('script');
+      var timer  = setTimeout(function () {
+        cleanup();
+        reject(new Error('JSONP timeout'));
+      }, 8000);
 
-  function doSearch(q, dropdown, spinner, input) {
-    spinner.classList.add('show');
-    var isAbn = /^\d{10,11}$/.test(q.replace(/\s/g, ''));
-    var url;
-    if (isAbn) {
-      url = 'https://abr.business.gov.au/json/AbnDetails.aspx?abn=' + q.replace(/\s/g, '') + '&guid=' + GUID;
-    } else {
-      url = 'https://abr.business.gov.au/json/MatchingNames.aspx?name=' + encodeURIComponent(q) + '&maxResults=8&guid=' + GUID;
-    }
-    jsonp(url).then(function(data) {
-      dropdown.innerHTML = '';
-      var items = [];
-      if (isAbn && data && data.Abn) {
-        items.push({name: data.EntityName || '', abn: data.Abn, state: data.AddressState || '', pc: data.AddressPostcode || '', type: data.EntityTypeName || '', status: data.AbnStatus || ''});
-      } else if (data && data.Names) {
-        data.Names.forEach(function(r) {
-          items.push({name: r.Name || r.BusinessName || '', abn: r.Abn || '', state: r.State || '', pc: r.Postcode || '', type: r.Type || '', status: r.AbnStatus || ''});
-        });
-      }
-      if (items.length === 0) {
-        dropdown.innerHTML = '<div class="abn-item" style="cursor:default;color:#9ca3af;text-align:center">No matching businesses found</div>';
-      } else {
-        items.forEach(function(it) {
-          var div = document.createElement('div');
-          div.className = 'abn-item';
-          var statusHtml = '';
-          if (it.status) {
-            var cls = it.status.toLowerCase() === 'active' ? 'abn-status-active' : 'abn-status-cancelled';
-            statusHtml = ' <span class="abn-status ' + cls + '">' + esc(it.status) + '</span>';
-          }
-          var meta = [];
-          if (it.abn) meta.push('<span class="abn-item-abn">ABN ' + esc(formatAbn(it.abn)) + '</span>');
-          if (it.state) meta.push(esc(it.state));
-          if (it.pc) meta.push(esc(it.pc));
-          if (it.type) meta.push(esc(it.type));
-          div.innerHTML = '<div class="abn-item-name">' + esc(it.name) + statusHtml + '</div><div class="abn-item-meta">' + meta.join(' &bull; ') + '</div>';
-          div.addEventListener('click', function() { selectResult(it, input, dropdown); });
-          dropdown.appendChild(div);
-        });
-      }
-      dropdown.classList.add('show');
-    }).catch(function() {
-      dropdown.innerHTML = '<div class="abn-item" style="cursor:default;color:#9ca3af;text-align:center">Lookup failed - please try again</div>';
-      dropdown.classList.add('show');
-    }).finally(function() { spinner.classList.remove('show'); });
-  }
-
-  function selectResult(it, input, dropdown) {
-    // Fill business name
-    var bizName = document.getElementById('business_name');
-    if (bizName && it.name) setVal(bizName, it.name);
-    // Fill ABN
-    var abnField = document.getElementById('abn');
-    if (abnField && it.abn) setVal(abnField, formatAbn(it.abn));
-    // Show confirmed
-    var conf = document.getElementById('abn-confirmed');
-    var confName = document.getElementById('abn-confirmed-name');
-    var confMeta = document.getElementById('abn-confirmed-meta');
-    if (conf && confName && confMeta) {
-      confName.textContent = it.name;
-      var parts = [];
-      if (it.abn) parts.push('ABN ' + formatAbn(it.abn));
-      if (it.type) parts.push(it.type);
-      if (it.state) parts.push(it.state);
-      if (it.pc) parts.push(it.pc);
-      confMeta.textContent = parts.join(' â¢ ');
-      conf.classList.add('show');
-    }
-    dropdown.classList.remove('show');
-    input.value = '';
-    input.placeholder = 'Business found â search again to change';
-  }
-
-  function attachLookup() {
-    if (attached) return;
-    var step2 = document.getElementById('step-2');
-    if (!step2) return;
-    var bizField = document.getElementById('business_name');
-    if (!bizField) return;
-    attached = true;
-
-    // Build lookup UI
-    var group = document.createElement('div');
-    group.className = 'form-group';
-    group.id = 'abn-lookup-group';
-    group.innerHTML = [
-      '<label class="form-label" for="abn_lookup">',
-      '  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:4px;color:#d4a853"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
-      '  ABN / Business Name Lookup',
-      '</label>',
-      '<div style="position:relative">',
-      '  <input type="text" id="abn_lookup" class="form-input" placeholder="Search by business name or ABN..." autocomplete="off">',
-      '  <div class="abn-spinner" id="abn-spinner"></div>',
-      '  <div class="abn-dropdown" id="abn-dropdown"></div>',
-      '</div>',
-      '<span class="form-hint">Search the Australian Business Register â we\'ll auto-fill your details</span>',
-      '<div class="abn-confirmed" id="abn-confirmed">',
-      '  <div class="abn-confirmed-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>',
-      '  <div class="abn-confirmed-info">',
-      '    <div class="abn-confirmed-name" id="abn-confirmed-name"></div>',
-      '    <div class="abn-confirmed-meta" id="abn-confirmed-meta"></div>',
-      '  </div>',
-      '  <button type="button" class="abn-confirmed-clear" id="abn-confirmed-clear" title="Clear">&times;</button>',
-      '</div>'
-    ].join('\n');
-
-    // Insert before business name field's group
-    var bizGroup = bizField.closest('.form-group');
-    if (bizGroup && bizGroup.parentNode) {
-      bizGroup.parentNode.insertBefore(group, bizGroup);
-    }
-
-    // Wire up events
-    var input = document.getElementById('abn_lookup');
-    var dropdown = document.getElementById('abn-dropdown');
-    var spinner = document.getElementById('abn-spinner');
-    var clearBtn = document.getElementById('abn-confirmed-clear');
-    var timer;
-
-    if (input) {
-      input.addEventListener('input', function() {
+      function cleanup() {
         clearTimeout(timer);
-        var v = this.value.trim();
-        if (v.length < 3) { dropdown.classList.remove('show'); spinner.classList.remove('show'); return; }
-        timer = setTimeout(function() { doSearch(v, dropdown, spinner, input); }, 300);
-      });
-      input.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') dropdown.classList.remove('show');
-        if (e.key === 'ArrowDown') { var first = dropdown.querySelector('.abn-item'); if (first) { e.preventDefault(); first.focus(); } }
-      });
-    }
-    if (clearBtn) {
-      clearBtn.addEventListener('click', function() {
-        var conf = document.getElementById('abn-confirmed');
-        if (conf) conf.classList.remove('show');
-        if (input) { input.value = ''; input.placeholder = 'Search by business name or ABN...'; input.focus(); }
-      });
-    }
-    document.addEventListener('click', function(e) {
-      if (group && !group.contains(e.target)) dropdown.classList.remove('show');
-    });
+        delete window[cbName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+      }
 
-    console.log('[ElevateLend] ABN Lookup attached to Step 2');
+      window[cbName] = function (data) {
+        cleanup();
+        resolve(data);
+      };
+
+      script.src = url + '&callback=' + cbName;
+      script.onerror = function () {
+        cleanup();
+        reject(new Error('JSONP network error'));
+      };
+      document.head.appendChild(script);
+    });
   }
 
-  // Use MutationObserver to detect when Step 2 form elements appear
-  var observer = new MutationObserver(function() {
-    if (!attached) attachLookup();
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
+  /* -- Utilities------------------------------------------- */
+  function formatAbn(abn) {
+    var d = String(abn).replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 2) return d;
+    if (d.length <= 5) return d.slice(0, 2) + ' ' + d.slice(2);
+    if (d.length <= 8) return d.slice(0, 2) + ' ' + d.slice(2, 5) + ' ' + d.slice(5);
+    return d.slice(0, 2) + ' ' + d.slice(2, 5) + ' ' + d.slice(5, 8) + ' ' + d.slice(8);
+  }
 
-  // Also try immediately and after delays
-  attachLookup();
-  setTimeout(attachLookup, 500);
-  setTimeout(attachLookup, 1500);
-  setTimeout(attachLookup, 3000);
+  function isAbnQuery(str) {
+    var digits = str.replace(/\s/g, '');
+    return /^\d{10,11}$/.test(digits);
+  }
+
+  function escHtml(s) {
+    var el = document.createElement('span');
+    el.textContent = s;
+    return el.innerHTML;
+  }
+
+  function triggerInput(field) {
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    field.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  function markValid(field) {
+    var g = field.closest('.form-group');
+    if (!g) return;
+    g.classList.remove('is-error');
+    g.classList.add('is-valid');
+    var msg = g.querySelector('.field-message');
+    if (msg) msg.textContent = '';
+  }
+
+  /* -- API calls------------------------------------------- */
+  function searchByName(name) {
+    var url = NAME_SEARCH_URL
+      + '?name=' + encodeURIComponent(name)
+      + '&maxResults=10'
+      + '&guid=' + GUID;
+    return jsonp(url);
+  }
+
+  function lookupByAbn(abn) {
+    var digits = abn.replace(/\s/g, '');
+    var url = ABN_DETAILS_URL
+      + '?abn=' + digits
+      + '&guid=' + GUID;
+    return jsonp(url);
+  }
+
+  /* -- Render helpers-------------------------------------- */
+  function statusBadge(status) {
+    if (!status) return '';
+    var cls = (status.toLowerCase() === 'active')
+      ? 'abn-lookup-result__status--active'
+      : 'abn-lookup-result__status--cancelled';
+    return ' <span class="abn-lookup-result__status ' + cls + '">' + escHtml(status) + '</span>';
+  }
+
+  function buildResultItem(name, abn, state, postcode, entityType, abnStatus) {
+    var div = document.createElement('div');
+    div.className = 'abn-lookup-result';
+    div.setAttribute('role', 'option');
+    div.setAttribute('tabindex', '0');
+
+    var parts = [];
+    if (abn) parts.push('<span class="abn-lookup-result__abn">ABN ' + escHtml(formatAbn(abn)) + '</span>');
+    if (state) parts.push(escHtml(state));
+    if (postcode) parts.push(escHtml(postcode));
+    if (entityType) parts.push(escHtml(entityType));
+
+    div.innerHTML =
+      '<div class="abn-lookup-result__name">' + escHtml(name) + statusBadge(abnStatus) + '</div>' +
+      '<div class="abn-lookup-result__details">' + parts.join(' &bull; ') + '</div>';
+
+    div.addEventListener('click', function () {
+      selectResult(name, abn, state, postcode, entityType);
+    });
+    div.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectResult(name, abn, state, postcode, entityType);
+      }
+    });
+    return div;
+  }
+
+  function showEmpty(msg) {
+    resultsDiv.innerHTML = '<div class="abn-lookup-result--empty">' + escHtml(msg) + '</div>';
+    resultsDiv.classList.add('is-visible');
+  }
+
+  function renderNameResults(data) {
+    resultsDiv.innerHTML = '';
+
+    var names = data && data.Names;
+    if (!names || names.length === 0) {
+      showEmpty('No matching businesses found');
+      return;
+    }
+
+    names.forEach(function (r) {
+      var name = r.Name || r.BusinessName || '';
+      var abn  = r.Abn || '';
+      var st   = r.State || '';
+      var pc   = r.Postcode || '';
+      var typ  = r.Type || '';
+      var stat = r.AbnStatus || '';
+      resultsDiv.appendChild(buildResultItem(name, abn, st, pc, typ, stat));
+    });
+    resultsDiv.classList.add('is-visible');
+  }
+
+  function renderAbnResult(data) {
+    resultsDiv.innerHTML = '';
+
+    if (!data || !data.Abn) {
+      showEmpty('ABN not found \u2014 check the number and try again');
+      return;
+    }
+
+    /* The ABR ABN-detail response has different field names */
+    var name = data.EntityName || '';
+    if (!name && data.BusinessName && data.BusinessName.length) {
+      name = (typeof data.BusinessName === 'string') ? data.BusinessName : data.BusinessName[0];
+    }
+    var abn  = data.Abn || '';
+    var st   = data.AddressState || '';
+    var pc   = data.AddressPostcode || '';
+    var typ  = data.EntityTypeName || data.EntityTypeCode || '';
+    var stat = data.AbnStatus || '';
+
+    resultsDiv.appendChild(buildResultItem(name, abn, st, pc, typ, stat));
+    resultsDiv.classList.add('is-visible');
+  }
+
+  /* -- Selection & auto-fill------------------------------- */
+  function selectResult(name, abn, state, postcode, entityType) {
+    /* Fill business name */
+    if (bizName && name) {
+      bizName.value = name;
+      triggerInput(bizName);
+      markValid(bizName);
+    }
+
+    /* Fill ABN (formatted) */
+    if (abnField && abn) {
+      abnField.value = formatAbn(abn);
+      triggerInput(abnField);
+      markValid(abnField);
+    }
+
+    /* Show confirmation badge */
+    var metaParts = [];
+    if (abn) metaParts.push('ABN ' + formatAbn(abn));
+    if (entityType) metaParts.push(entityType);
+    if (state) metaParts.push(state);
+    if (postcode) metaParts.push(postcode);
+
+    confName.textContent = name;
+    confMeta.textContent = metaParts.join(' \u2022 ');
+    confirmed.classList.add('is-visible');
+
+    /* Hide dropdown & clear search */
+    resultsDiv.classList.remove('is-visible');
+    lookupInput.value = '';
+    lookupInput.placeholder = 'Business found \u2014 search again to change';
+  }
+
+  function clearSelection() {
+    confirmed.classList.remove('is-visible');
+    lookupInput.value = '';
+    lookupInput.placeholder = 'Search by business name or ABN...';
+    lookupInput.focus();
+    /* Don't clear bizName / ABN - let user manually edit if they want */
+  }
+
+  /* -- Event handlers-------------------------------------- */
+  lookupInput.addEventListener('input', function () {
+    var val = this.value.trim();
+    clearTimeout(debounceTimer);
+
+    if (val.length < 3) {
+      resultsDiv.classList.remove('is-visible');
+      spinner.classList.remove('is-visible');
+      return;
+    }
+
+    spinner.classList.add('is-visible');
+
+    debounceTimer = setTimeout(function () {
+      var promise;
+      if (isAbnQuery(val)) {
+        promise = lookupByAbn(val);
+        promise.then(renderAbnResult).catch(function () {
+          showEmpty('Lookup failed \u2014 please try again');
+        }).finally(function () {
+          spinner.classList.remove('is-visible');
+        });
+      } else {
+        promise = searchByName(val);
+        promise.then(renderNameResults).catch(function () {
+          showEmpty('Search failed \u2014 please try again');
+        }).finally(function () {
+          spinner.classList.remove('is-visible');
+        });
+      }
+    }, DEBOUNCE_MS);
+  });
+
+  /* Keyboard navigation in results */
+  lookupInput.addEventListener('keydown', function (e) {
+    if (!resultsDiv.classList.contains('is-visible')) return;
+    var items = resultsDiv.querySelectorAll('.abn-lookup-result');
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      items[0].focus();
+    } else if (e.key === 'Escape') {
+      resultsDiv.classList.remove('is-visible');
+    }
+  });
+
+  resultsDiv.addEventListener('keydown', function (e) {
+    var items = Array.prototype.slice.call(resultsDiv.querySelectorAll('.abn-lookup-result'));
+    var idx = items.indexOf(document.activeElement);
+    if (idx < 0) return;
+
+    if (e.key === 'ArrowDown' && idx < items.length - 1) {
+      e.preventDefault();
+      items[idx + 1].focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (idx === 0) lookupInput.focus();
+      else items[idx - 1].focus();
+    } else if (e.key === 'Escape') {
+      resultsDiv.classList.remove('is-visible');
+      lookupInput.focus();
+    }
+  });
+
+  /* Close dropdown on outside click */
+  document.addEventListener('click', function (e) {
+    if (!lookupGroup.contains(e.target)) {
+      resultsDiv.classList.remove('is-visible');
+    }
+  });
+
+  /* Clear button */
+  confClear.addEventListener('click', clearSelection);
+
+  /* Also listen on the existing ABN field - if user manually types 11 digits, auto-lookup */
+  if (abnField) {
+    abnField.addEventListener('input', function () {
+      var digits = this.value.replace(/\D/g, '');
+      if (digits.length === 11 && !confirmed.classList.contains('is-visible')) {
+        spinner.classList.add('is-visible');
+        lookupByAbn(digits).then(function (data) {
+          if (data && data.Abn && data.EntityName) {
+            var name = data.EntityName || '';
+            var st   = data.AddressState || '';
+            var pc   = data.AddressPostcode || '';
+            var typ  = data.EntityTypeName || '';
+            var stat = data.AbnStatus || '';
+
+            /* Auto-fill business name if empty */
+            if (bizName && (!bizName.value || bizName.value.trim() === '')) {
+              bizName.value = name;
+              triggerInput(bizName);
+              markValid(bizName);
+            }
+
+            /* Show confirmation */
+            var parts = [];
+            if (data.Abn) parts.push('ABN ' + formatAbn(data.Abn));
+            if (typ) parts.push(typ);
+            if (st) parts.push(st);
+            if (pc) parts.push(pc);
+            if (stat) parts.push(stat);
+            confName.textContent = name;
+            confMeta.textContent = parts.join(' \u2022 ');
+            confirmed.classList.add('is-visible');
+          }
+        }).catch(function () { /* silent */ }).finally(function () {
+          spinner.classList.remove('is-visible');
+        });
+      }
+    });
+  }
 
   console.log('[ElevateLend] ABN Lookup module loaded');
 })();

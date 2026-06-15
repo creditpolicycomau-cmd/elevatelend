@@ -1,3 +1,4 @@
 trigger deploy
 trigger cartoon images deploy
 trigger deploy after git reconnection
+trigger deploy v2 after fresh reconnection

@@ -36,7 +36,7 @@
   <div class="promo-bar" role="banner" id="promo-bar">
     <div class="container" style="position: relative;">
       <span style="font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">LIMITED TIME</span> &mdash; 6 weeks no repayments on approved business loans. <a href="#eofy-offer">View offer &rarr;</a>
-      <button class="promo-bar__close" aria-label="Close promotional banner" onclick="document.getElementById('promo-bar').style.display='none'">
+      <button class="promo-bar__close" aria-label="Close promotional banner" onclick="document.getElementById('promo-bar').style.display='none'; document.getElementById('main-nav').classList.add('promo-hidden')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
@@ -117,6 +117,9 @@
        3. HERO SECTION
        ==================================================================== -->
   <section class="hero" id="hero">
+    <div class="hero__bg-image" aria-hidden="true">
+      <img src="https://i.ibb.co/KzV7Rz8k/Chat-GPT-Image-Jun-15-2026-10-49-25-AM.png" alt="" loading="eager" width="1920" height="1080">
+    </div>
     <div class="hero__grid-pattern" aria-hidden="true"></div>
     <div class="container">
       <div class="hero__content">
@@ -180,25 +183,52 @@
   </section>
 
   <!-- ====================================================================
+       3b. TRUSTED LENDER LOGO BAR
+       ==================================================================== -->
+  <section class="lender-bar" aria-label="Trusted by leading Australian lenders">
+    <p class="lender-bar__title">Trusted by Australia's leading lenders</p>
+    <div class="lender-bar__track" style="display:flex;flex-wrap:nowrap;gap:3rem;animation:marquee 25s linear infinite;width:max-content;">
+      <!-- Set 1 -->
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Prospa</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Moula</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Lumi</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">OnDeck</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Zip Business</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">ScotPac</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Judo Bank</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Westpac</span>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Prospa</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Moula</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Lumi</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">OnDeck</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Zip Business</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">ScotPac</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Judo Bank</span>
+      <span class="lender-bar__item" style="flex-shrink:0;white-space:nowrap;">Westpac</span>
+    </div>
+  </section>
+
+  <!-- ====================================================================
        4. STATS BAR
        ==================================================================== -->
   <section class="section--dark" style="padding-block:var(--space-10);">
     <div class="container">
       <div class="stats stats--divided">
         <div class="stat">
-          <div class="stat__value" data-counter="$2.4B+">$2.4B+</div>
+          <div class="stat__value" data-counter="$2.4B+">$0B+</div>
           <div class="stat__label">Total Funded</div>
         </div>
         <div class="stat">
-          <div class="stat__value" data-counter="93%">93%</div>
+          <div class="stat__value" data-counter="93%">0%</div>
           <div class="stat__label">Approval Rate</div>
         </div>
         <div class="stat">
-          <div class="stat__value" data-counter="75+">75+</div>
+          <div class="stat__value" data-counter="75+">0+</div>
           <div class="stat__label">Lender Partners</div>
         </div>
         <div class="stat">
-          <div class="stat__value" data-counter="24hrs">24hrs</div>
+          <div class="stat__value" data-counter="24hrs">0hrs</div>
           <div class="stat__label">Average Decision</div>
         </div>
       </div>
@@ -208,7 +238,7 @@
   <!-- ====================================================================
        5. EOFY OFFER SECTION
        ==================================================================== -->
-  <section class="section section--gray" id="eofy-offer">
+  <section class="section section--gray animate-on-scroll" id="eofy-offer">
     <div class="container">
       <div style="max-width:800px; margin-inline:auto; text-align:center;">
 
@@ -268,7 +298,7 @@
        ==================================================================== -->
   <section class="section" id="products">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header animate-on-scroll">
         <span class="section-header__badge">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
           Funding Solutions
@@ -277,10 +307,32 @@
         <p class="section-header__subtitle">From short-term cash flow to long-term growth capital &mdash; we match you with the best product and lender for your situation.</p>
       </div>
 
+      <!-- Products hero image -->
+      <div class="animate-on-scroll" style="margin-bottom:var(--space-10); border-radius:var(--radius-2xl); overflow:hidden; position:relative; max-height:240px;">
+        <img src="https://i.ibb.co/nH7pMcY/Chat-GPT-Image-Jun-15-2026-10-52-10-AM.png" alt="Modern business office" loading="lazy" width="1200" height="400" style="width:100%; height:240px; object-fit:cover; display:block;">
+        <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(10,22,40,0.7) 0%, rgba(10,22,40,0.2) 50%, rgba(10,22,40,0.7) 100%);"></div>
+        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:var(--space-10); padding:var(--space-6);">
+          <div style="text-align:center;">
+            <div style="font-size:var(--font-size-3xl); font-weight:800; color:var(--color-gold-400);">$5K - $5M</div>
+            <div style="font-size:var(--font-size-sm); color:var(--color-navy-100);">Funding range</div>
+          </div>
+          <div style="width:1px; height:48px; background:rgba(255,255,255,0.2);"></div>
+          <div style="text-align:center;">
+            <div style="font-size:var(--font-size-3xl); font-weight:800; color:var(--color-gold-400);">4.9%</div>
+            <div style="font-size:var(--font-size-sm); color:var(--color-navy-100);">Rates from p.a.</div>
+          </div>
+          <div style="width:1px; height:48px; background:rgba(255,255,255,0.2);"></div>
+          <div style="text-align:center;">
+            <div style="font-size:var(--font-size-3xl); font-weight:800; color:var(--color-gold-400);">24hrs</div>
+            <div style="font-size:var(--font-size-sm); color:var(--color-navy-100);">Fast funding</div>
+          </div>
+        </div>
+      </div>
+
       <div class="product-cards">
 
         <!-- Business Loans -->
-        <a href="/products/business-loans/" class="product-card product-card--featured" style="text-decoration:none;">
+        <a href="/products/business-loans/" class="product-card product-card--featured animate-on-scroll" style="text-decoration:none;">
           <span class="product-card__badge">Most Popular</span>
           <div class="product-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
@@ -306,7 +358,7 @@
         </a>
 
         <!-- Line of Credit -->
-        <a href="/products/line-of-credit/" class="product-card" style="text-decoration:none;">
+        <a href="/products/line-of-credit/" class="product-card animate-on-scroll animate-on-scroll--delay-1" style="text-decoration:none;">
           <div class="product-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg>
           </div>
@@ -331,7 +383,7 @@
         </a>
 
         <!-- Equipment Finance -->
-        <a href="/products/equipment-finance/" class="product-card" style="text-decoration:none;">
+        <a href="/products/equipment-finance/" class="product-card animate-on-scroll animate-on-scroll--delay-2" style="text-decoration:none;">
           <div class="product-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
           </div>
@@ -356,7 +408,7 @@
         </a>
 
         <!-- Invoice Finance -->
-        <a href="/products/invoice-finance/" class="product-card" style="text-decoration:none;">
+        <a href="/products/invoice-finance/" class="product-card animate-on-scroll animate-on-scroll--delay-3" style="text-decoration:none;">
           <div class="product-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
@@ -381,7 +433,7 @@
         </a>
 
         <!-- Trade Finance -->
-        <a href="/products/trade-finance/" class="product-card" style="text-decoration:none;">
+        <a href="/products/trade-finance/" class="product-card animate-on-scroll animate-on-scroll--delay-4" style="text-decoration:none;">
           <div class="product-card__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
           </div>
@@ -404,6 +456,84 @@
             </span>
           </div>
         </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       6b. WHY CHOOSE ELEVATELEND
+       ==================================================================== -->
+  <section class="section section--gray" id="why-us">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); align-items:center;">
+
+        <!-- Image side -->
+        <div class="animate-on-scroll" style="position:relative; border-radius:var(--radius-2xl); overflow:hidden;">
+          <img src="https://i.ibb.co/V8sdGXL/Chat-GPT-Image-Jun-15-2026-10-55-19-AM.png" alt="Business team collaboration" loading="lazy" width="800" height="600" style="width:100%; height:auto; display:block; border-radius:var(--radius-2xl);">
+          <!-- Floating stat card -->
+          <div style="position:absolute; bottom:var(--space-6); left:var(--space-6); background:rgba(255,255,255,0.95); backdrop-filter:blur(12px); border-radius:var(--radius-lg); padding:var(--space-4) var(--space-5); box-shadow:var(--shadow-xl);">
+            <div style="font-size:var(--font-size-2xl); font-weight:800; color:var(--color-navy-900); line-height:1;">93%</div>
+            <div style="font-size:var(--font-size-xs); color:var(--color-gray-500); font-weight:500;">Approval Rate</div>
+          </div>
+        </div>
+
+        <!-- Content side -->
+        <div class="animate-on-scroll animate-on-scroll--delay-2">
+          <span class="section-header__badge" style="margin-bottom:var(--space-4);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Why ElevateLend
+          </span>
+          <h2 style="font-size:var(--font-size-3xl); font-weight:var(--font-weight-bold); color:var(--color-navy-900); margin-bottom:var(--space-6); line-height:var(--line-height-tight);">
+            The smarter way to fund your business
+          </h2>
+          <p style="color:var(--color-gray-600); font-size:var(--font-size-lg); margin-bottom:var(--space-8); line-height:var(--line-height-relaxed);">
+            We do the hard work so you don't have to. One application unlocks Australia's largest panel of business lenders.
+          </p>
+
+          <div style="display:grid; gap:var(--space-6);">
+            <!-- Feature 1 -->
+            <div style="display:flex; gap:var(--space-4); align-items:flex-start;">
+              <div style="flex-shrink:0; width:48px; height:48px; border-radius:var(--radius-lg); background:var(--color-navy-50); display:flex; align-items:center; justify-content:center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-600)" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:600; color:var(--color-navy-900); margin-bottom:2px;">No credit impact</div>
+                <div style="font-size:var(--font-size-sm); color:var(--color-gray-500); line-height:var(--line-height-relaxed);">Your initial application uses a soft check only. Your credit score stays untouched.</div>
+              </div>
+            </div>
+            <!-- Feature 2 -->
+            <div style="display:flex; gap:var(--space-4); align-items:flex-start;">
+              <div style="flex-shrink:0; width:48px; height:48px; border-radius:var(--radius-lg); background:var(--color-navy-50); display:flex; align-items:center; justify-content:center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-600)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:600; color:var(--color-navy-900); margin-bottom:2px;">24-hour funding</div>
+                <div style="font-size:var(--font-size-sm); color:var(--color-gray-500); line-height:var(--line-height-relaxed);">From application to funds in your account within one business day for most products.</div>
+              </div>
+            </div>
+            <!-- Feature 3 -->
+            <div style="display:flex; gap:var(--space-4); align-items:flex-start;">
+              <div style="flex-shrink:0; width:48px; height:48px; border-radius:var(--radius-lg); background:var(--color-navy-50); display:flex; align-items:center; justify-content:center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-600)" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:600; color:var(--color-navy-900); margin-bottom:2px;">Dedicated funding manager</div>
+                <div style="font-size:var(--font-size-sm); color:var(--color-gray-500); line-height:var(--line-height-relaxed);">A real person guides you through every step. Not a chatbot &mdash; a qualified finance professional.</div>
+              </div>
+            </div>
+            <!-- Feature 4 -->
+            <div style="display:flex; gap:var(--space-4); align-items:flex-start;">
+              <div style="flex-shrink:0; width:48px; height:48px; border-radius:var(--radius-lg); background:var(--color-navy-50); display:flex; align-items:center; justify-content:center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-navy-600)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:600; color:var(--color-navy-900); margin-bottom:2px;">100% free, no obligations</div>
+                <div style="font-size:var(--font-size-sm); color:var(--color-gray-500); line-height:var(--line-height-relaxed);">Our service costs you nothing. Lenders pay us, so you get unbiased recommendations at zero cost.</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -454,6 +584,17 @@
 
       </div>
 
+      <!-- Visual image for How It Works -->
+      <div class="how-it-works__visual animate-on-scroll" style="margin-top:var(--space-10);">
+        <img src="https://i.ibb.co/k2mY4RsG/Chat-GPT-Image-Jun-15-2026-11-00-15-AM.png" alt="Business professionals reviewing loan options" loading="lazy" width="1200" height="400">
+        <div class="how-it-works__visual-overlay">
+          <div class="how-it-works__visual-text">
+            One application. 75+ lenders. Best rates.
+            <span>No paperwork, no hassle, no credit impact</span>
+          </div>
+        </div>
+      </div>
+
       <div style="text-align:center; margin-top:var(--space-12);">
         <a href="/apply/" class="btn btn--primary btn--lg">Start your free application &rarr;</a>
         <p style="font-size:var(--font-size-sm); color:var(--color-navy-300); margin-top:var(--space-3);">No credit hit &bull; No obligations &bull; 100% free</p>
@@ -488,7 +629,7 @@
           </div>
           <p class="testimonial-card__quote">"I needed $150K to expand my workshop and ElevateLend had me matched with three lenders within an hour. Funds were in my account the next day. Absolutely brilliant service."</p>
           <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar testimonial-card__avatar--placeholder" aria-hidden="true">MR</div>
+            <div class="testimonial-card__avatar" style="width:48px;height:48px;overflow:hidden;display:inline-block"><img src="https://i.ibb.co/Pv5vTMj2/Chat-GPT-Image-Jun-15-2026-12-55-07-PM.png" alt="Mark Richardson" style="width:300%;height:auto;object-fit:cover;margin:0"></div>
             <div>
               <div class="testimonial-card__name">Mark Richardson</div>
               <div class="testimonial-card__role">Owner, Richardson Auto &mdash; Melbourne, VIC</div>
@@ -507,7 +648,7 @@
           </div>
           <p class="testimonial-card__quote">"As a cafe owner, cash flow is everything. The line of credit ElevateLend matched me with has been a game-changer. I only pay for what I draw down and the rate was far better than my bank offered."</p>
           <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar testimonial-card__avatar--placeholder" aria-hidden="true">SN</div>
+            <div class="testimonial-card__avatar" style="width:48px;height:48px;overflow:hidden;display:inline-block"><img src="https://i.ibb.co/Pv5vTMj2/Chat-GPT-Image-Jun-15-2026-12-55-07-PM.png" alt="Sarah Nguyen" style="width:300%;height:auto;object-fit:cover;margin:0 0 0 -100%"></div>
             <div>
               <div class="testimonial-card__name">Sarah Nguyen</div>
               <div class="testimonial-card__role">Founder, Bloom Espresso &mdash; Sydney, NSW</div>
@@ -526,7 +667,7 @@
           </div>
           <p class="testimonial-card__quote">"We financed a new fleet of trucks through ElevateLend at 4.9% &mdash; our broker couldn't get close to that. The process was seamless and our dedicated manager kept us informed the whole way."</p>
           <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar testimonial-card__avatar--placeholder" aria-hidden="true">DP</div>
+            <div class="testimonial-card__avatar" style="width:48px;height:48px;overflow:hidden;display:inline-block"><img src="https://i.ibb.co/Pv5vTMj2/Chat-GPT-Image-Jun-15-2026-12-55-07-PM.png" alt="Daniel Petropoulos" style="width:300%;height:auto;object-fit:cover;margin:0 0 0 -200%"></div>
             <div>
               <div class="testimonial-card__name">Daniel Petropoulos</div>
               <div class="testimonial-card__role">Director, Swift Logistics &mdash; Brisbane, QLD</div>
@@ -574,10 +715,18 @@
   <!-- ====================================================================
        9. PRIVATE LENDING TEASER
        ==================================================================== -->
-  <section class="section section--dark" id="private-lending">
+  <section class="section section--dark animate-on-scroll" id="private-lending">
     <div class="container">
-      <div style="display:grid; grid-template-columns:1fr; gap:var(--space-10); align-items:center; max-width:900px; margin-inline:auto;">
-        <div style="text-align:center;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); align-items:center;">
+        <!-- Image side -->
+        <div style="position:relative; border-radius:var(--radius-2xl); overflow:hidden; order:2;">
+          <img src="https://i.ibb.co/9386vTqn/Chat-GPT-Image-Jun-15-2026-12-20-27-PM-1.png" alt="Modern commercial building" loading="lazy" width="800" height="600" style="width:100%; height:auto; display:block; border-radius:var(--radius-2xl); opacity:0.85;">
+          <div style="position:absolute; bottom:var(--space-6); right:var(--space-6); background:rgba(212,168,83,0.95); border-radius:var(--radius-lg); padding:var(--space-4) var(--space-5);">
+            <div style="font-size:var(--font-size-2xl); font-weight:800; color:var(--color-navy-900); line-height:1;">$40M+</div>
+            <div style="font-size:var(--font-size-xs); color:var(--color-navy-800); font-weight:500;">Max Facility</div>
+          </div>
+        </div>
+        <div style="order:1;">
           <span class="section-header__badge" style="margin-bottom:var(--space-4);">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Private &amp; Commercial
@@ -613,6 +762,79 @@
   </section>
 
   <!-- ====================================================================
+       9b. MEET THE TEAM
+       ==================================================================== -->
+  <section class="section section--gray" id="team">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <span class="section-header__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          Our Team
+        </span>
+        <h2 class="section-header__title">The people behind your funding</h2>
+        <p class="section-header__subtitle">Our experienced team of finance professionals is dedicated to finding the best lending solution for your business.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--space-8); max-width:1000px; margin-inline:auto;">
+
+        <!-- Team Member 1 -->
+        <div class="animate-on-scroll" style="text-align:center;">
+          <div style="width:160px; height:160px; border-radius:50%; overflow:hidden; margin:0 auto var(--space-4); border:3px solid var(--color-navy-100); box-shadow:var(--shadow-lg);">
+            <img src="https://i.ibb.co/W4yF3h7t/Chat-GPT-Image-Jun-15-2026-12-50-36-PM.png" alt="James Walker" width="320" height="320" loading="lazy" style="width:200%; height:200%; object-fit:cover; margin:0;">
+          </div>
+          <div style="font-weight:700; color:var(--color-navy-900); font-size:var(--font-size-base); margin-bottom:2px;">James Walker</div>
+          <div style="font-size:var(--font-size-sm); color:var(--color-gold-600); font-weight:500; margin-bottom:var(--space-2);">Managing Director</div>
+          <div style="font-size:var(--font-size-xs); color:var(--color-gray-500); line-height:var(--line-height-relaxed);">20+ years in commercial finance. Former NAB business banking lead.</div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="animate-on-scroll animate-on-scroll--delay-1" style="text-align:center;">
+          <div style="width:160px; height:160px; border-radius:50%; overflow:hidden; margin:0 auto var(--space-4); border:3px solid var(--color-navy-100); box-shadow:var(--shadow-lg);">
+            <img src="https://i.ibb.co/W4yF3h7t/Chat-GPT-Image-Jun-15-2026-12-50-36-PM.png" alt="Emma Chen" width="320" height="320" loading="lazy" style="width:200%; height:200%; object-fit:cover; margin:0 0 0 -100%;">
+          </div>
+          <div style="font-weight:700; color:var(--color-navy-900); font-size:var(--font-size-base); margin-bottom:2px;">Emma Chen</div>
+          <div style="font-size:var(--font-size-sm); color:var(--color-gold-600); font-weight:500; margin-bottom:var(--space-2);">Head of Lending</div>
+          <div style="font-size:var(--font-size-xs); color:var(--color-gray-500); line-height:var(--line-height-relaxed);">15 years specialising in SME finance and alternative lending solutions.</div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="animate-on-scroll animate-on-scroll--delay-2" style="text-align:center;">
+          <div style="width:160px; height:160px; border-radius:50%; overflow:hidden; margin:0 auto var(--space-4); border:3px solid var(--color-navy-100); box-shadow:var(--shadow-lg);">
+            <img src="https://i.ibb.co/W4yF3h7t/Chat-GPT-Image-Jun-15-2026-12-50-36-PM.png" alt="David Kumar" width="320" height="320" loading="lazy" style="width:200%; height:200%; object-fit:cover; margin:-100% 0 0 0;">
+          </div>
+          <div style="font-weight:700; color:var(--color-navy-900); font-size:var(--font-size-base); margin-bottom:2px;">David Kumar</div>
+          <div style="font-size:var(--font-size-sm); color:var(--color-gold-600); font-weight:500; margin-bottom:var(--space-2);">Senior Finance Manager</div>
+          <div style="font-size:var(--font-size-xs); color:var(--color-gray-500); line-height:var(--line-height-relaxed);">Certified finance broker with deep expertise in equipment and asset finance.</div>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="animate-on-scroll animate-on-scroll--delay-3" style="text-align:center;">
+          <div style="width:160px; height:160px; border-radius:50%; overflow:hidden; margin:0 auto var(--space-4); border:3px solid var(--color-navy-100); box-shadow:var(--shadow-lg);">
+            <img src="https://i.ibb.co/W4yF3h7t/Chat-GPT-Image-Jun-15-2026-12-50-36-PM.png" alt="Lisa Thompson" width="320" height="320" loading="lazy" style="width:200%; height:200%; object-fit:cover; margin:-100% 0 0 -100%;">
+          </div>
+          <div style="font-weight:700; color:var(--color-navy-900); font-size:var(--font-size-base); margin-bottom:2px;">Lisa Thompson</div>
+          <div style="font-size:var(--font-size-sm); color:var(--color-gold-600); font-weight:500; margin-bottom:var(--space-2);">Client Relations Manager</div>
+          <div style="font-size:var(--font-size-xs); color:var(--color-gray-500); line-height:var(--line-height-relaxed);">Your dedicated point of contact from application to settlement and beyond.</div>
+        </div>
+
+      </div>
+
+      <!-- Team CTA -->
+      <div class="animate-on-scroll" style="text-align:center; margin-top:var(--space-12);">
+        <div style="display:inline-flex; align-items:center; gap:var(--space-6); background:var(--color-white); border-radius:var(--radius-2xl); padding:var(--space-6) var(--space-8); box-shadow:var(--shadow-lg); border:1px solid var(--color-gray-100);">
+          <img src="https://i.ibb.co/ycnm7Cjj/Chat-GPT-Image-Jun-15-2026-12-45-52-PM.png" alt="Team collaboration" width="200" height="120" loading="lazy" style="border-radius:var(--radius-lg); object-fit:cover;">
+          <div style="text-align:left;">
+            <div style="font-weight:700; color:var(--color-navy-900); font-size:var(--font-size-lg); margin-bottom:4px;">Ready to talk to our team?</div>
+            <div style="font-size:var(--font-size-sm); color:var(--color-gray-500); margin-bottom:var(--space-3);">Get expert guidance on the best funding options for your business.</div>
+            <a href="/apply/" class="btn btn--primary btn--sm">Get started &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================
        10. FAQ SECTION
        ==================================================================== -->
   <section class="section" id="faq">
@@ -628,7 +850,7 @@
 
       <div class="faq-list" data-accordion>
 
-        <div class="faq-item" data-accordion-item>
+        <div class="faq-item animate-on-scroll" data-accordion-item>
           <button class="faq-item__trigger" data-accordion-trigger>
             Does applying affect my credit score?
             <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -638,7 +860,7 @@
           </div>
         </div>
 
-        <div class="faq-item" data-accordion-item>
+        <div class="faq-item animate-on-scroll animate-on-scroll--delay-1" data-accordion-item>
           <button class="faq-item__trigger" data-accordion-trigger>
             How long does the application take?
             <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -648,7 +870,7 @@
           </div>
         </div>
 
-        <div class="faq-item" data-accordion-item>
+        <div class="faq-item animate-on-scroll animate-on-scroll--delay-1" data-accordion-item>
           <button class="faq-item__trigger" data-accordion-trigger>
             Is ElevateLend a lender?
             <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -658,7 +880,7 @@
           </div>
         </div>
 
-        <div class="faq-item" data-accordion-item>
+        <div class="faq-item animate-on-scroll animate-on-scroll--delay-2" data-accordion-item>
           <button class="faq-item__trigger" data-accordion-trigger>
             What documents do I need to apply?
             <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -668,7 +890,7 @@
           </div>
         </div>
 
-        <div class="faq-item" data-accordion-item>
+        <div class="faq-item animate-on-scroll animate-on-scroll--delay-2" data-accordion-item>
           <button class="faq-item__trigger" data-accordion-trigger>
             What types of businesses can apply?
             <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -678,7 +900,7 @@
           </div>
         </div>
 
-        <div class="faq-item" data-accordion-item>
+        <div class="faq-item animate-on-scroll animate-on-scroll--delay-3" data-accordion-item>
           <button class="faq-item__trigger" data-accordion-trigger>
             How much can I borrow?
             <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -695,10 +917,25 @@
   <!-- ====================================================================
        11. FINAL CTA SECTION
        ==================================================================== -->
-  <section class="section" id="final-cta" style="padding-bottom:var(--space-16);">
-    <div class="container">
-      <div class="cta">
+  <section class="section" id="final-cta" style="padding-bottom:var(--space-16); position:relative; overflow:hidden;">
+    <!-- Background image -->
+    <div style="position:absolute; inset:0; z-index:0;">
+      <img src="https://i.ibb.co/rKKBxpct/Chat-GPT-Image-Jun-15-2026-12-20-27-PM-2.png" alt="" loading="lazy" style="width:100%; height:100%; object-fit:cover; opacity:0.06;">
+    </div>
+    <div class="container" style="position:relative; z-index:1;">
+      <div class="cta animate-on-scroll">
         <div class="cta__content">
+          <!-- Trust faces -->
+          <div style="display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-6);">
+            <div style="display:flex; margin-right:var(--space-3);">
+              <div style="width:36px;height:36px;overflow:hidden;border-radius:50%;border:2px solid white;display:inline-block"><img src="https://i.ibb.co/Pv5vTMj2/Chat-GPT-Image-Jun-15-2026-12-55-07-PM.png" alt="" style="width:300%;height:auto;object-fit:cover;margin:0"></div>
+              <div style="width:36px;height:36px;overflow:hidden;border-radius:50%;border:2px solid white;margin-left:-10px;display:inline-block"><img src="https://i.ibb.co/Pv5vTMj2/Chat-GPT-Image-Jun-15-2026-12-55-07-PM.png" alt="" style="width:300%;height:auto;object-fit:cover;margin:0 0 0 -100%"></div>
+              <div style="width:36px;height:36px;overflow:hidden;border-radius:50%;border:2px solid white;margin-left:-10px;display:inline-block"><img src="https://i.ibb.co/Pv5vTMj2/Chat-GPT-Image-Jun-15-2026-12-55-07-PM.png" alt="" style="width:300%;height:auto;object-fit:cover;margin:0 0 0 -200%"></div>
+              <div style="width:36px;height:36px;overflow:hidden;border-radius:50%;border:2px solid white;margin-left:-10px;display:inline-block"><img src="https://i.ibb.co/W4yF3h7t/Chat-GPT-Image-Jun-15-2026-12-50-36-PM.png" alt="" style="width:200%;height:200%;object-fit:cover;margin:0"></div>
+              <div style="width:36px;height:36px;overflow:hidden;border-radius:50%;border:2px solid white;margin-left:-10px;display:inline-block"><img src="https://i.ibb.co/W4yF3h7t/Chat-GPT-Image-Jun-15-2026-12-50-36-PM.png" alt="" style="width:200%;height:200%;object-fit:cover;margin:0 0 0 -100%"></div>
+            </div>
+            <span style="font-size:var(--font-size-sm); color:var(--color-gray-600); font-weight:500;">1,200+ funded businesses</span>
+          </div>
           <h2 class="cta__title">Ready to elevate your business funding?</h2>
           <p class="cta__subtitle">Join 1,200+ Australian businesses who found better rates, faster funding, and a smoother experience with ElevateLend.</p>
           <div class="cta__actions">
@@ -743,7 +980,7 @@
             </a>
             <!-- Instagram -->
             <a href="#" class="footer__social-link" aria-label="Follow us on Instagram">
-              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
             </a>
           </div>
         </div>
@@ -805,7 +1042,7 @@
   </footer>
 
   <!-- ====================================================================
-       FAB — Floating Action Button
+       FAB - Floating Action Button
        ==================================================================== -->
   <div class="fab">
     <button class="fab__secondary" data-back-to-top aria-label="Back to top">
@@ -814,7 +1051,7 @@
   </div>
 
   <!-- ====================================================================
-       INLINE SCRIPTS — Dropdown & Nav scroll state
+       INLINE SCRIPTS
        ==================================================================== -->
   <script>
     // Products dropdown hover
@@ -846,19 +1083,15 @@
       update();
     })();
 
-    // FAQ accordion (inline fallback using CSS-based open class)
+    // FAQ accordion
     (function() {
       document.querySelectorAll('.faq-item__trigger').forEach(function(trigger) {
         trigger.addEventListener('click', function() {
           var item = trigger.closest('.faq-item');
           var wasOpen = item.classList.contains('is-open');
-
-          // Close all siblings
           item.closest('.faq-list').querySelectorAll('.faq-item').forEach(function(sibling) {
             sibling.classList.remove('is-open');
           });
-
-          // Toggle current
           if (!wasOpen) {
             item.classList.add('is-open');
           }
@@ -875,7 +1108,6 @@
         var isOpen = menu.classList.toggle('is-open');
         toggle.setAttribute('aria-expanded', String(isOpen));
       });
-      // Close on link click
       menu.querySelectorAll('a').forEach(function(link) {
         link.addEventListener('click', function() {
           menu.classList.remove('is-open');
@@ -898,7 +1130,7 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
       elements.forEach(function(el) { observer.observe(el); });
     })();
 
